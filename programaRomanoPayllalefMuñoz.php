@@ -1,19 +1,15 @@
 <?php
 include_once("tateti.php");
 
-/**************************************/
-/***** DATOS DE LOS INTEGRANTES *******/
-/**************************************/
+/************************************* DATOS DE LOS INTEGRANTES *********************************************/
 
 /* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
-/*Alfredo Nicolas Payllalef FAI 3496 Mail: alfredo.payllalef@est.fi.uncoma.edu.ar Usuario de github AlfredoPayllalef
-Fabian Facundo Muñoz Huinolpan FAI 1787 Mail: Fabianchock@Gmail.com Usuario de github  threeIslands3
-Luciana Romano  FAI 3075 Mail: luciana.romano@est.fi.uncoma.edu.ar Usuario de github lucianaromano 
+/*Alfredo Nicolas Payllalef|FAI 3496| Mail: alfredo.payllalef@est.fi.uncoma.edu.ar| Usuario de github: AlfredoPayllalef
+Fabian Facundo Muñoz Huinolpan|FAI 1787| Mail: Fabianchock@Gmail.com| Usuario de github: threeIslands3
+Luciana Romano|FAI 3075| Mail: luciana.romano@est.fi.uncoma.edu.ar| Usuario de github: lucianaromano 
 */
 
-
-
-/************************************* DEFINICION DE FUNCIONES *******************************************/
+/************************************* DEFINICION DE FUNCIONES ********************************************/
 
 /**
 * Muestro en pantalla las opciones del Menu, si el valor no es válido se le pedira otro hasta que lo sea.
@@ -51,7 +47,7 @@ function seleccionarOpcion()
 function solicitarValor( $min, $max)
 {
     //int $valor
-    echo "Ingrese un valor entre " .$min. " y ".$max. ":";
+    echo "Ingrese un valor:"; //entre " .$min. " y ".$max. ":";
     $valor = trim(fgets(STDIN));
     while ($valor < $min || $valor >$max ) {
         echo ("El valor no es valido, ingrese un valor valido:");
@@ -80,12 +76,53 @@ $juego = jugar();
 
 
 
-/*
 do {
+    $opcion = seleccionarOpcion ();
+    if ($opcion == 1) { //jugar al tateti, el usuario debe ingresar si elige X o O
+
+    } elseif ($opcion == 2) { //Se le solicita al usuario un número de juego
+        //funcion solicitarValor (primer juego, ultimo juego)
+        echo ("Ingrese un numero de juego:");
+        
+        
+
+
+    } elseif ($opcion == 3) { //mostrar el primer juego ganador
+       
+
+    } elseif ($opcion == 4) { //mostrar porcentaje de juegos ganados
+
+
+    } elseif ($opcion == 5) { //mostrar resumen de 
+        // muestra en pantalla un resumen de los juegos ganados, los juegos perdidos, empates y acumulado de puntos
+      echo ("Ingrese el nombre del jugador:");
+      $nombreResumen = trim(fgets(STDIN));
+
+
+    } elseif ($opcion== 6) { //mostrar listado de juegos ordenado por jugador O
+
+
+    } else { //salir del programa
+        echo "  Saliendo del Programa ...\n";
+        sleep(4);  //a los 4s va a salir del programa
+    }
+
+} while ($opcion);
+//                   FIN
+
+
+
+
+
+
+
+
+
+/*do //{
     $opcion = ...;
 
     
-    switch ($opcion) {
+    //switch ($opcion) {
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
 
@@ -101,5 +138,4 @@ do {
         
             //...
     }
-} while ($opcion != X);
-*/
+} while ($opcion != X); */
