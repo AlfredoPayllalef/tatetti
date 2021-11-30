@@ -12,13 +12,28 @@ Luciana Romano  FAI 3075 Mail: luciana.romano@est.fi.uncoma.edu.ar Usuario de gi
 */
 
 
-
-
-
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+/**
+ * Solicita un numero dentro de un rango, si no es valido, pide un valor hasta que lo sea
+ * @param int $min
+ * @param int $max
+ * @return int
+ */
+
+function solicitarValor( $min, $max)
+{
+    //int $valor
+    echo "Ingrese un valor entre " .$min. " y ".$max. ":";
+    $valor = trim(fgets(STDIN));
+    while ($valor < $min || $valor >$max ) {
+        echo ("El valor no es valido, ingrese un valor valido:");
+        $valor = trim(fgets(STDIN));
+    }
+    return $valor;
+}
 
 
 
