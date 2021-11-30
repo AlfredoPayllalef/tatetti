@@ -61,7 +61,59 @@ function solicitarValor( $min, $max)
 }
 
 
+//funcion permite agregar un juego
+// strin $sinbolo, string $nombre, int $puntos 
+//@param array $coleccionJuegos 
+// @retun array $coleccionJuegos 
+$coleccionJuegos=[];
+$respuesta = "si";
+$i=0 ;
+while($respuesta<>"NO"){
+            echo"ingrese nombre ";
+            $nombre=trim(fgets(STDIN));
+            echo "ingrese simbolo X o O ";
+            $simbolo = strtoupper(trim(fgets(STDIN)));
+            $badera=true;
+            while($badera==true) {
+                if($simbolo=="X" or $simbolo=="O"){
+                    echo"ingrese la cantidad de puntos ";
+                    $puntos= trim(fgets(STDIN));
+                    while ($badera==true) {
+                        if(ctype_digit($puntos)){
+                            $coleccionJuegos=agregarjuego($coleccionJuegos,$nombre,$simbolo,$puntos);
+                            echo "¿desea ingresar otra partida? SI/NO ";
+                            $respuesta=strtoupper(trim(fgets(STDIN)));
+                            $badera=FALSE;
+                        }else{
+                            echo"ingrese una opcion valida ";
+                            $puntos=trim(fgets(STDIN));
+                            $badera=true;
+                        }
+                    }
+                }else{
+                    echo "ingrese una opcion valida ";
+                    $simbolo=strtoupper(trim(fgets(STDIN)));
+                    $badera=true;
+                }   
+            }
+    }
+print_r($coleccionJuegos);
+$count= count($coleccionJuegos);
+echo $count;
 
+/**esta funcion agrega otra partida.
+ * @param array $agregarjuego 
+ * @param string $nombre
+ * @param string $simbolo
+ * @param int $puntos
+ * @retun array
+ */
+
+function agregarjuego($agregarjuego, $nombre, $simbolo, $puntos){
+     $i=count($agregarjuego);
+     $agregarjuego[$i]=[$nombre,$simbolo,$puntos];
+     return $agregarjuego;
+}
 
 /****************************************** PROGRAMA PRINCIPAL **********************************************/
 
