@@ -433,10 +433,10 @@ function jugar()
 
     //armar estructura del juego
     $juego = [
-        "jugadorCruz" => $nombreJugadorCruz,
-        "jugadorCirculo" => $nombreJugadorCirculo,
-        "puntosCruz" => $puntosCruz,
-        "puntosCirculo" => $puntosCirculo
+               "jugadorCruz" => $nombreJugadorCruz,
+               "jugadorCirculo" => $nombreJugadorCirculo,
+               "puntosCruz" => $puntosCruz,
+               "puntosCirculo" => $puntosCirculo
     ];
 
     return $juego;

@@ -12,6 +12,42 @@ Luciana Romano|FAI 3075| Mail: luciana.romano@est.fi.uncoma.edu.ar| Usuario de g
 /************************************* DEFINICION DE FUNCIONES ********************************************/
 
 /**
+ * Obtener coleccion de juegos a traves de ejemplos de juego
+ *
+ *  @return array
+ */
+function cargarJuegos (){
+    //array $juego0 , $juego1, $juego2, $juego3, $juego4, $juego5, $juego6, $juego7, $juego8, $juego9
+
+    $juego1=["jugadorCruz"=> "MAJO" , "jugadorCirculo" => "DAVID", "puntosCruz"=> 1, "puntosCirculo" => 0];
+    $juego2=["jugadorCruz"=> "PABLO" , "jugadorCirculo" => "SEBA", "puntosCruz"=> 0, "puntosCirculo" => 1];
+    $juego3=["jugadorCruz"=> "JUAN" , "jugadorCirculo" => "MABEL", "puntosCruz"=> 0, "puntosCirculo" => 5];
+    $juego4=["jugadorCruz"=> "CARLOS" , "jugadorCirculo" => "DANIEL", "puntosCruz"=> 3, "puntosCirculo" => 3];
+    $juego5=["jugadorCruz"=> "RUBEN" , "jugadorCirculo" => "PAULA", "puntosCruz"=> 1, "puntosCirculo" => 0];
+    $juego6=["jugadorCruz"=> "JOAQUIN" , "jugadorCirculo" => "SOL", "puntosCruz"=> 1, "puntosCirculo" => 4];
+    $juego7=["jugadorCruz"=> "MARIA" , "jugadorCirculo" => "CARLOS", "puntosCruz"=> 5, "puntosCirculo" => 0];
+    $juego8=["jugadorCruz"=> "SOL" , "jugadorCirculo" => "JOAQUIN", "puntosCruz"=> 0, "puntosCirculo" => 1];
+    $juego9=["jugadorCruz"=> "SOFIA" , "jugadorCirculo" => "BLANCA", "puntosCruz"=> 1, "puntosCirculo" => 2];
+    $juego10=["jugadorCruz"=> "MARTIN" , "jugadorCirculo" => "FEDE", "puntosCruz"=> 1, "puntosCirculo" => 3];
+  
+    $coleccionJuegos = []; //inicializo el arreglo $coleccionJuegos
+    $coleccionJuegos [0]= $juego1;
+    $coleccionJuegos [1]= $juego2;
+    $coleccionJuegos [2]= $juego3;
+    $coleccionJuegos [3]= $juego4;
+    $coleccionJuegos [4]= $juego5;
+    $coleccionJuegos [5]= $juego6;
+    $coleccionJuegos [6]= $juego7;
+    $coleccionJuegos [7]= $juego8;
+    $coleccionJuegos [8]= $juego9;
+    $coleccionJuegos [9]= $juego10;
+    
+    return ($coleccionJuegos);
+//print_r($juego3); para que me muestre los resultados de las colecciones
+}
+
+
+/**
 * Muestro en pantalla las opciones del Menu, si el valor no es válido se le pedira otro hasta que lo sea.
 * @return int
 */
@@ -69,8 +105,8 @@ while($respuesta<>"NO"){
             $nombre=trim(fgets(STDIN));
             echo "ingrese simbolo X o O ";
             $simbolo = strtoupper(trim(fgets(STDIN)));
-            $badera=true;
-            while($badera==true) {
+            $bandera=true;
+            while($bandera==true) {
                 if($simbolo=="X" or $simbolo=="O"){
                     echo"ingrese la cantidad de puntos ";
                     $puntos= trim(fgets(STDIN));
@@ -79,11 +115,11 @@ while($respuesta<>"NO"){
                             $coleccionJuegos=agregarjuego($coleccionJuegos,$nombre,$simbolo,$puntos);
                             echo "¿desea ingresar otra partida? SI/NO ";
                             $respuesta=strtoupper(trim(fgets(STDIN)));
-                            $badera=FALSE;
+                            $bandera=FALSE;
                         }else{
                             echo"ingrese una opcion valida ";
                             $puntos=trim(fgets(STDIN));
-                            $badera=true;
+                            $bandera=true;
                         }
                     }
                 }else{
@@ -147,7 +183,8 @@ do {
 
     } elseif ($opcion == 5) { //mostrar resumen de 
         // muestra en pantalla un resumen de los juegos ganados, los juegos perdidos, empates y acumulado de puntos
-      echo ("Ingrese el nombre del jugador:");
+        //funcion resumenJugador
+        echo ("Ingrese el nombre del jugador:");
       $nombreResumen = trim(fgets(STDIN));
 
 
