@@ -114,45 +114,6 @@ function datosJuego($juego, $numJuego)
     echo ("Jugador O: ") .$nombreJugadorCirculo. " obtuvo " .$puntosCirculo. " puntos\n";  
 }
 
-//funcion permite agregar un juego
-// string $simbolo, string $nombre, int $puntos 
-//@param array $coleccionJuegos 
-// @return array $coleccionJuegos 
-$coleccionJuegos=[];
-$respuesta = "si";
-$i=0 ;
-while($respuesta<>"NO"){
-            echo"ingrese nombre ";
-            $nombre=trim(fgets(STDIN));
-            echo "ingrese simbolo X o O ";
-            $simbolo = strtoupper(trim(fgets(STDIN)));
-            $bandera=true;
-            while($bandera==true) {
-                if($simbolo=="X" or $simbolo=="O"){
-                    echo"ingrese la cantidad de puntos ";
-                    $puntos= trim(fgets(STDIN));
-                    while ($bandera==true) {
-                        if(ctype_digit($puntos)){
-                            $coleccionJuegos=agregarjuego($coleccionJuegos,$nombre,$simbolo,$puntos);
-                            echo "¿desea ingresar otra partida? SI/NO ";
-                            $respuesta=strtoupper(trim(fgets(STDIN)));
-                            $bandera=FALSE;
-                        }else{
-                            echo"ingrese una opcion valida ";
-                            $puntos=trim(fgets(STDIN));
-                            $bandera=true;
-                        }
-                    }
-                }else{
-                    echo "ingrese una opcion valida ";
-                    $simbolo=strtoupper(trim(fgets(STDIN)));
-                    $bandera=true;
-                }   
-            }
-    }
-print_r($coleccionJuegos);
-
-
 
 /**esta funcion agrega otra partida.
  * @param array $agregarjuego 
