@@ -151,8 +151,8 @@ while($respuesta<>"NO"){
             }
     }
 print_r($coleccionJuegos);
-$count= count($coleccionJuegos);
-echo $count;
+
+
 
 /**esta funcion agrega otra partida.
  * @param array $agregarjuego 
@@ -197,6 +197,30 @@ function arregloResumenJugador($nombre,$juegosGanados,$juegosPerdidos, $juegosEm
 
    return $resumenJugador;
 }
+
+
+/**
+ * @param array $array
+ * @param string $nombre
+ * @return int $primerGanado
+ * */
+function buscarPimerGanado($array,$nombre){
+    $n=count($array);
+    $i=0;
+    $bandera= true;
+    while ($i <$n && $bandera) { 
+        if ($array[$i][0]=$nombre) {
+            if($array[$i][2]>1)
+                $primerGanado=$i;
+                $bandera= false;
+        }else{
+            $primerGanado=-1;
+            $i=$i+1;
+        }
+    }
+    return $primerGanado;
+}
+
 
 /****************************************** PROGRAMA PRINCIPAL **********************************************/
 
