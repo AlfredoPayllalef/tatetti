@@ -184,7 +184,29 @@ function resumenJugador($coleccionDeJuegos,$nombreJugador){
 return $resumenDeJugador;
 }
 
-
+/**
+ * Dada una coleccion de juegos retorna la cantidad de juegos que tuvieron ganador (no empatados)
+ * @param array $colecJuegos
+ * @var int $juegosGanados, $i, $tamañoArreglo, $cantCruz, $cantCirculo
+ * @return int
+ * */
+function juegosConGanador ($colecJuegos)
+{
+    //int $juegosGanados
+    $i=0;
+    $tamañoArreglo=0;
+    $juegosGanados=0;
+    $tamañoArreglo= count($colecJuegos);
+    for($i=0;$i<$tamañoArreglo;$i++){
+        $cantCirculo = $colecJuegos[$i]["puntosCirculo"];
+        $cantCruz = $colecJuegos[$i]["puntosCruz"];
+    if(($cantCruz<$cantCirculo)||($cantCirculo<$cantCruz)){
+    $juegosGanados = $juegosGanados+1;
+    }
+    }
+    return $juegosGanados;
+    }
+    
 /**
  * Inicializo una estructura de datos para los juegos
  * @return array 
