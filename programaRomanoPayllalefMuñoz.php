@@ -158,30 +158,32 @@ function buscarPimerGanado($array,$nombre)
  * @param array $coleccionDeJuegos
  * @param string $nombreJugador
  * @var int $puntosJug0 , $puntosJugx, $i
- * @return STRING
+ * @var array $resumen
+ * @return array
 */
 function resumenJugador($coleccionDeJuegos,$nombreJugador){
-    //string $resumenDeJugador 
+ 
     $nombreJugador = strtoupper($nombreJugador);
     $tamañoArreglo = count($coleccionDeJuegos);
     $i = 0;
     $puntosJug0 = 0;
     $puntosJugx = 0;
+    $resumen = [];
     while($i < $tamañoArreglo){
-    //evaluamos si el jugador participo en X o en O
-    if($coleccionDeJuegos[$i]["jugadorCruz"] == $nombreJugador){
-     $puntosJugx = $puntosJugx + $coleccionDeJuegos[$i]["puntosCruz"];
-    }
-    elseif($coleccionDeJuegos[$i]["jugadorCirculo"] == $nombreJugador){
-     $puntosJug0 = $puntosJug0 + $coleccionDeJuegos[$i]["puntosCirculo"];
+       //evaluamos si el jugador participo en X o en O
+       if($coleccionDeJuegos[$i]["jugadorCruz"] == $nombreJugador){
+       $puntosJugx = $puntosJugx + $coleccionDeJuegos[$i]["puntosCruz"];
+       }
+       elseif($coleccionDeJuegos[$i]["jugadorCirculo"] == $nombreJugador){
+       $puntosJug0 = $puntosJug0 + $coleccionDeJuegos[$i]["puntosCirculo"];
     }
     $i = $i +1;
     }
-    $resumenDeJugador = ("nombre jugador: ".$nombreJugador."\n
-    puntos como jugador cruz: ".$puntosJugx."\n
-    puntos como jugador circulo: ".$puntosJug0."\n
-    puntos en total: ".$puntosJug0+$puntosJugx."");
-return $resumenDeJugador;
+    $resumen[0]=$nombreJugador;
+    $resumen[1]=$puntosJugx;
+    $resumen[2]=$puntosJug0;
+    $resumen[3]=$puntosJug0+$puntosJugx;
+    return $resumen;
 }
 
 /**
@@ -270,7 +272,7 @@ function arregloResumenJugador($nombre,$juegosGanados,$juegosPerdidos, $juegosEm
 
 //Declaración de variables:
 //array $coleccionJuegos, $juego
-//int $nJuego,
+//int $nJuego, $porcentaje, $cantidadJuegos, $juegosGanados
 //string $nombreBuscado
 
 //Inicialización de variables:
@@ -301,6 +303,7 @@ do {
             $coleccionJuegos = cargarJuegos ();
             $primerGanado = buscarPimerGanado($coleccionJuegos,$nombrebuscado);
             echo"el primer juego ganado es el \n".$primerGanado;
+
             break;
         
         case 4: //mostrar porcentaje de juegos ganados
@@ -308,12 +311,15 @@ do {
             $juegosGanados = juegosConGanador($coleccionJuegos) ;
             $porcentaje = $juegosGanados * 100 / $cantidadJuegos ;
             echo "el porcentaje de juegos ganados es:" .$porcentaje. "% \n";
+
             break;
         case 5: //mostrar resumen de 
             // muestra en pantalla un resumen de los juegos ganados, los juegos perdidos, empates y acumulado de puntos
             //funcion resumenJugador
             echo ("Ingrese el nombre del jugador:");
             $nombreResumen = trim(fgets(STDIN));
+
+
             break;
         case 6:     //mostrar listado de juegos ordenado por jugador O    
             break;
