@@ -213,7 +213,10 @@ do {
 
 
     } elseif ($opcion == 3) { //mostrar el primer juego ganador
-       
+        echo"ingrese nombre del jugador ";
+        $nombrebuscado=trim(fgets(STDIN));
+        $primerGanado = buscarPimerGanado($coleccionJuegos,$nombrebuscado);
+        echo"el primer juego ganado es el ".$primerGanado;
 
     } elseif ($opcion == 4) { //mostrar porcentaje de juegos ganados
 
