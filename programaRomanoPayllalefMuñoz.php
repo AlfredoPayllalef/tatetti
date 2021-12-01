@@ -82,7 +82,7 @@ function seleccionarOpcion()
 function solicitarValor( $min, $max)
 {
     //int $valor
-    echo "Ingrese un valor:"; //entre " .$min. " y ".$max. ":";
+    echo "Ingrese un valor (entre " .$min. " y ".$max. "):";
     $valor = trim(fgets(STDIN));
     while ($valor < $min || $valor >$max ) {
         echo ("El valor no es valido, ingrese un valor valido:");
@@ -96,7 +96,7 @@ function solicitarValor( $min, $max)
  * @param array $juego
  * @param int $numJuego
  */
-function datosJuego($juego, $numJuego)
+function datosJuego($juego, $coleccionJuegos,$numJuego)
 {
     if ($juego["puntosCruz"] > $juego["puntosCirculo"]){
         $resultadoJuego="gano X";
@@ -108,12 +108,11 @@ function datosJuego($juego, $numJuego)
         $resultadoJuego="empate";
     }
    
-   $juego[$numJuego]=cargarJuegos();
-
+    //$juego [$numJuego] = cargarJuegos ();
     echo "********\n";
     echo "Juego TATETI: " .$numJuego . "(" .$resultadoJuego.")\n" ;  
-    echo "Jugador X: " . $juego["jugadorCruz"] . " obtuvo " . $juego["puntosCruz"] . " puntos\n";
-    echo "Jugaador O: ". $juego["jugadorCirculo"] . " obtuvo " . $juego["puntosCirculo"] . " puntos\n";
+    echo "Jugador X: " .$juego["jugadorCruz"] . " obtuvo " . $juego["puntosCruz"] . " puntos\n";
+    echo "Jugador O: ". $juego["jugadorCirculo"] . " obtuvo " . $juego["puntosCirculo"] . " puntos\n";
     echo "********\n";
 }
 
@@ -183,14 +182,18 @@ function resumenJugador($coleccionJuegos,$nombreJugador){
  * Inicializo una estructura de datos para los juegos
  * @return array 
  */
-function arregloJuegos() 
+function arregloJuegos( $nombreJugadorCruz, $nombreJugadorCirculo, $puntosCruz, $puntosCirculo) 
 {
-   // array $juegos
-   $juegos =[] ; //incializo el arreglo $resumenJugador
-   $juegos = ["jugadorCruz"=> "nombreX", "jugadorCirculo"=> "nombreO","puntosCruz" => "ptosX","puntosCirculo"=> "ptosO"];
+   // array $juego
+   $juego =[] ; //incializo el arreglo $resumenJugador
+   $juego = ["jugadorCruz"=> $nombreJugadorCruz, 
+             "jugadorCirculo"=> $nombreJugadorCirculo,
+             "puntosCruz" => $puntosCruz,
+             "puntosCirculo"=> $puntosCirculo];
 
-   return $juegos;
+   return $juego;
 }
+
 
 /**
  * Inicializo una estructura de datos para ver el resumen del jugador
@@ -232,13 +235,11 @@ do {
     if ($opcion == 1) { //jugar al tateti, el usuario debe ingresar si elige X o O
 
     } elseif ($opcion == 2) { //Se le solicita al usuario un número de juego
-        //funcion solicitarValor (primer juego, ultimo juego)
-        echo ("Ingrese un número de juego:"); //el numero de juego debe ser valido
+        
+        echo ("Ingrese un número de juego:"); 
         $nJuego = trim(fgets(STDIN));
         $datosJuego1 = datosJuego($juego, $nJuego);
         
-
-
     } elseif ($opcion == 3) { //mostrar el primer juego ganador
        
 
