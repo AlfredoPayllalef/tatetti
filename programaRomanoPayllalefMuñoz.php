@@ -98,8 +98,6 @@ function solicitarValor( $min, $max)
  */
 function datosJuego($juego, $numJuego)
 {
-    //
-    $juego = $coleccionJuegos[$numJuego];//-1
     if ($juego["puntosCruz"] > $juego["puntosCirculo"]){
         $resultadoJuego="gano X";
     }
@@ -109,9 +107,14 @@ function datosJuego($juego, $numJuego)
     else {
         $resultadoJuego="empate";
     }
-    echo ("Juego TATETI: ") .$numJuego. "(" .$resultadoJuego. ")\n";
-    echo ("Jugador X: ") .$nombreJugadorCruz. " obtuvo " .$puntosCruz. " puntos\n";
-    echo ("Jugador O: ") .$nombreJugadorCirculo. " obtuvo " .$puntosCirculo. " puntos\n";  
+   
+   $juego[$numJuego]=cargarJuegos();
+
+    echo "********\n";
+    echo "Juego TATETI: " .$numJuego . "(" .$resultadoJuego.")\n" ;  
+    echo "Jugador X: " . $juego["jugadorCruz"] . " obtuvo " . $juego["puntosCruz"] . " puntos\n";
+    echo "Jugaador O: ". $juego["jugadorCirculo"] . " obtuvo " . $juego["puntosCirculo"] . " puntos\n";
+    echo "********\n";
 }
 
 //funcion permite agregar un juego
@@ -213,7 +216,7 @@ $juego = jugar();
 //print_r($juego);
 //imprimirResultado($juego);
 
-
+$coleccionJuegos = cargarJuegos (); // Inicializo la coleccion de juegos
 
 do {
     $opcion = seleccionarOpcion ();
@@ -247,8 +250,9 @@ do {
         echo "  Saliendo del Programa ...\n";
         sleep(4);  //a los 4s va a salir del programa
     }
-
-} while ($opcion);
+    echo "\n Desea ingresar otra opcion? (si/no): ";
+    $respuesta = trim(fgets(STDIN));
+} while ($respuesta == "si");
 //                   FIN
 
 
@@ -263,7 +267,7 @@ do {
     $opcion = ...;
 
     
-    //switch ($opcion) {
+    //switch ($opcion) {  //ver sobre esa funcion
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
 
