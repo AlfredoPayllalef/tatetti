@@ -64,7 +64,7 @@ function seleccionarOpcion()
       echo "Ingrese opcion: ";
       $opcionMenu = trim(fgets(STDIN));
 
-      if (($opcionMenu<0) || ($opcionMenu> 7) && $opcionMenu) {
+      if (($opcionMenu<0) || ($opcionMenu> 7) or !ctype_digit($opcionMenu)) {
         echo "Opcion Incorecta! Ingrese otra opcioón: \n";
       }
     } while (!($opcionMenu == 1 || $opcionMenu == 2 || $opcionMenu == 3 || $opcionMenu == 4 || $opcionMenu == 5 || $opcionMenu == 6 || $opcionMenu == 7));
