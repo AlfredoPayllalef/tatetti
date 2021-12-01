@@ -13,7 +13,6 @@ Luciana Romano|FAI 3075| Mail: luciana.romano@est.fi.uncoma.edu.ar| Usuario de g
 
 /**
  * Obtener coleccion de juegos a traves de ejemplos de juego
- *
  *  @return array
  */
 function cargarJuegos (){
@@ -23,11 +22,11 @@ function cargarJuegos (){
     $juego2=["jugadorCruz"=> "PABLO" , "jugadorCirculo" => "SEBA", "puntosCruz"=> 0, "puntosCirculo" => 1];
     $juego3=["jugadorCruz"=> "JUAN" , "jugadorCirculo" => "MABEL", "puntosCruz"=> 0, "puntosCirculo" => 5];
     $juego4=["jugadorCruz"=> "CARLOS" , "jugadorCirculo" => "DANIEL", "puntosCruz"=> 3, "puntosCirculo" => 3];
-    $juego5=["jugadorCruz"=> "RUBEN" , "jugadorCirculo" => "PAULA", "puntosCruz"=> 1, "puntosCirculo" => 0];
+    $juego5=["jugadorCruz"=> "RUBEN" , "jugadorCirculo" => "PAULA", "puntosCruz"=> 1, "puntosCirculo" => 1];
     $juego6=["jugadorCruz"=> "JOAQUIN" , "jugadorCirculo" => "SOL", "puntosCruz"=> 1, "puntosCirculo" => 4];
     $juego7=["jugadorCruz"=> "MARIA" , "jugadorCirculo" => "CARLOS", "puntosCruz"=> 5, "puntosCirculo" => 0];
     $juego8=["jugadorCruz"=> "SOL" , "jugadorCirculo" => "JOAQUIN", "puntosCruz"=> 0, "puntosCirculo" => 1];
-    $juego9=["jugadorCruz"=> "SOFIA" , "jugadorCirculo" => "BLANCA", "puntosCruz"=> 1, "puntosCirculo" => 2];
+    $juego9=["jugadorCruz"=> "SOFIA" , "jugadorCirculo" => "BLANCA", "puntosCruz"=> 2, "puntosCirculo" => 2];
     $juego10=["jugadorCruz"=> "MARTIN" , "jugadorCirculo" => "FEDE", "puntosCruz"=> 1, "puntosCirculo" => 3];
   
     $coleccionJuegos = []; //inicializo el arreglo $coleccionJuegos
@@ -92,11 +91,33 @@ function solicitarValor( $min, $max)
     return $valor;
 }
 
+/**
+ * Muestra en pantalla los datos del juego
+ * @param array $juego
+ * @param int $numJuego
+ */
+function datosJuego($juego, $numJuego)
+{
+    //
+    $juego = $coleccionJuegos[$numJuego];//-1
+    if ($juego["puntosCruz"] > $juego["puntosCirculo"]){
+        $resultadoJuego="gano X";
+    }
+    elseif ($juego["puntosCruz"] < $juego["puntosCirculo"]) {
+        $resultadoJuego="gano O ";
+    }
+    else {
+        $resultadoJuego="empate";
+    }
+    echo ("Juego TATETI: ") .$numJuego. "(" .$resultadoJuego. ")\n";
+    echo ("Jugador X: ") .$nombreJugadorCruz. " obtuvo " .$puntosCruz. " puntos\n";
+    echo ("Jugador O: ") .$nombreJugadorCirculo. " obtuvo " .$puntosCirculo. " puntos\n";  
+}
 
 //funcion permite agregar un juego
-// strin $sinbolo, string $nombre, int $puntos 
+// string $simbolo, string $nombre, int $puntos 
 //@param array $coleccionJuegos 
-// @retun array $coleccionJuegos 
+// @return array $coleccionJuegos 
 $coleccionJuegos=[];
 $respuesta = "si";
 $i=0 ;
@@ -110,7 +131,7 @@ while($respuesta<>"NO"){
                 if($simbolo=="X" or $simbolo=="O"){
                     echo"ingrese la cantidad de puntos ";
                     $puntos= trim(fgets(STDIN));
-                    while ($badera==true) {
+                    while ($bandera==true) {
                         if(ctype_digit($puntos)){
                             $coleccionJuegos=agregarjuego($coleccionJuegos,$nombre,$simbolo,$puntos);
                             echo "¿desea ingresar otra partida? SI/NO ";
@@ -125,7 +146,7 @@ while($respuesta<>"NO"){
                 }else{
                     echo "ingrese una opcion valida ";
                     $simbolo=strtoupper(trim(fgets(STDIN)));
-                    $badera=true;
+                    $bandera=true;
                 }   
             }
     }
@@ -138,13 +159,26 @@ echo $count;
  * @param string $nombre
  * @param string $simbolo
  * @param int $puntos
- * @retun array
+ * @return array
  */
 
 function agregarjuego($agregarjuego, $nombre, $simbolo, $puntos){
      $i=count($agregarjuego);
      $agregarjuego[$i]=[$nombre,$simbolo,$puntos];
      return $agregarjuego;
+}
+
+/**
+ * Inicializo una estructura de datos para los juegos
+ * @return array 
+ */
+function arregloJuegos() 
+{
+   // array $juegos
+   $juegos =[] ; //incializo el arreglo $resumenJugador
+   $juegos = ["jugadorCruz"=> "nombreX", "jugadorCirculo"=> "nombreO","puntosCruz" => "ptosX","puntosCirculo"=> "ptosO"];
+
+   return $juegos;
 }
 
 /**
@@ -168,7 +202,7 @@ function arregloResumenJugador($nombre,$juegosGanados,$juegosPerdidos, $juegosEm
 
 
 //Declaración de variables:
-
+//array $coleccionJuegos, $juego
 
 //Inicialización de variables:
 
@@ -187,8 +221,9 @@ do {
 
     } elseif ($opcion == 2) { //Se le solicita al usuario un número de juego
         //funcion solicitarValor (primer juego, ultimo juego)
-        echo ("Ingrese un numero de juego:");
-        
+        echo ("Ingrese un número de juego:"); //el numero de juego debe ser valido
+        $nJuego = trim(fgets(STDIN));
+        $datosJuego1 = datosJuego($juego, $nJuego);
         
 
 
