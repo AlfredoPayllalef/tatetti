@@ -271,6 +271,7 @@ function arregloResumenJugador($nombre,$juegosGanados,$juegosPerdidos, $juegosEm
 //Declaración de variables:
 //array $coleccionJuegos, $juego
 //int $nJuego,
+//string $nombreBuscado
 
 //Inicialización de variables:
 
@@ -284,8 +285,8 @@ do {
             //para evitar comparar a la misma variable (opcion) con valores diferentes
         case 1:  //jugar al tateti, el usuario ingresa nombre y elige simbolo
             $juego = jugar();
-        print_r($juego);
-        imprimirResultado($juego);
+            print_r($juego);
+            imprimirResultado($juego);
 
             break;
         case 2:  //mostrar un juego en pantalla
@@ -303,6 +304,10 @@ do {
             break;
         
         case 4: //mostrar porcentaje de juegos ganados
+            $cantidadJuegos = count($coleccionJuegos); 
+            $juegosGanados = juegosConGanador($coleccionJuegos) ;
+            $porcentaje = $juegosGanados * 100 / $cantidadJuegos ;
+            echo "el porcentaje de juegos ganados es:" .$porcentaje. "% \n";
             break;
         case 5: //mostrar resumen de 
             // muestra en pantalla un resumen de los juegos ganados, los juegos perdidos, empates y acumulado de puntos
