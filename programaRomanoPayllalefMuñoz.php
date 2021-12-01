@@ -147,6 +147,23 @@ function agregarjuego($agregarjuego, $nombre, $simbolo, $puntos){
      return $agregarjuego;
 }
 
+/**
+ * Inicializo una estructura de datos para ver el resumen del jugador
+ * @param string $nombre
+ * @param int $juegosGanados, $juegosPerdidos, $juegosEmpatados, $puntosAcumulados
+ * @return array 
+ */
+
+function arregloResumenJugador($nombre,$juegosGanados,$juegosPerdidos, $juegosEmpatados, $puntosAcumulados) 
+{
+   // array $resumenJugador
+   $resumenJugador =[] ; //incializo el arreglo $resumenJugador
+   $resumenJugador = ["nombre"=> $nombre, "juegosGanados" => $juegosGanados, "juegosPerdidos"=> $juegosPerdidos, 
+   "juegosEmpatados"=> $juegosEmpatados, "puntosAcumulados"=> $puntosAcumulados];
+
+   return $resumenJugador;
+}
+
 /****************************************** PROGRAMA PRINCIPAL **********************************************/
 
 
