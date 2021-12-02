@@ -205,6 +205,30 @@ function juegosConGanador($colecJuegos)
 }
 
 /**
+ * este modulo solicita al usuario un simbolo X o O, valida el dato ingresado y retorna el simbolo elegido
+ * @var STRING $simbolo, $simboloIngresado
+ * @var boolean $bandera
+ */
+function solicitaSimbolo()
+{
+    $bandera = true;
+    $simbolo = "";
+
+    while ($bandera) {
+        echo ("ingrese un simbolo (X - O)");
+        $simboloIngresado = trim(fgets(STDIN));
+        $simboloIngresado = strtoupper($simboloIngresado);
+        if (($simboloIngresado == "X") || ($simboloIngresado == "O")) {
+            $simbolo = $simboloIngresado;
+            $bandera = false;
+        } else {
+            echo ("el simbolo no coincide con las opciones permitidas. Reintente otra vez");
+        }
+    }
+    return $simbolo;
+}
+
+/**
  * Inicializo una estructura de datos para los juegos
  * @return array 
  */
