@@ -129,14 +129,15 @@ function datosJuego($juego, $numJuego)
 }
 
 /**esta funcion agrega otra partida.
- * @param array $agregarjuego 
+ * @param array $agregarJuego 
  * @param string $nombre
  * @param string $simbolo
  * @param int $puntos
  * @return array
  */
 
-function agregarjuego($agregarjuego, $nombre, $simbolo, $puntos){
+function agregarJuego($agregarjuego, $nombre, $simbolo, $puntos)
+{
      $i=count($agregarjuego);
      $agregarjuego[$i]=[$nombre,$simbolo,$puntos];
      return $agregarjuego;
@@ -186,7 +187,8 @@ function resumenJugador($coleccionDeJuegos, $nombreJugador)
  * @var STRING $simbolo, $simboloIngresado
  * @var boolean $bandera
  */
-function solicitaSimbolo(){
+function solicitaSimbolo()
+{
     $bandera = true;
     $simbolo = "";
    
@@ -257,7 +259,8 @@ function solicitaSimbolo1()
  * @param string $nombre
  * @return int $primerGanado
  * */
-function buscarPimerGanado($arrayColeccion,$nombre){
+function buscarPimerGanado($arrayColeccion,$nombre)
+{
     $n=count($arrayColeccion);//busca la dimencion del array
     $i=0;
     $bandera= true;
@@ -295,7 +298,8 @@ function buscarPimerGanado($arrayColeccion,$nombre){
     return $primerGanado;
 }
 
-function cmp($juegoA, $juegoB) {//$juegoA,juegoB
+function cmp($juegoA, $juegoB) 
+{   //$juegoA,juegoB
     if ($juegoA["jugadorCirculo"] == $juegoB["jugadorCirculo"]) {
         $orden=0;
     }
@@ -307,7 +311,8 @@ function cmp($juegoA, $juegoB) {//$juegoA,juegoB
     return $orden;
 }
 
-function ordenarO($arrayJuegos){
+function ordenarO($arrayJuegos)
+{
     uasort($arrayJuegos, 'cmp');
     print_r($arrayJuegos);
 }
@@ -346,13 +351,12 @@ function arregloResumenJugador($nombre,$juegosGanados,$juegosPerdidos, $juegosEm
    return $resumenJugador;
 }
 
-
 /****************************************** PROGRAMA PRINCIPAL **********************************************/
 
 
 //Declaración de variables:
 //array $coleccionJuegos, $juego
-//int $nJuego,
+//int $nJuego, $maximo, $minimo
 //string $nombreBuscado, $simboloElegido
 
 //Inicialización de variables:
@@ -378,14 +382,21 @@ do {
             $juego = jugar();
             print_r($juego);
             imprimirResultado($juego);
-
+            //guardar datos en estructura de datos  $arregloJuegos, o $juego
+            $juego[ "jugadorCruz"] = trim(fgets(STDIN));
+            $juego["jugadorCirculo"] = trim(fgets(STDIN));
+            $juego["puntosCruz"]= trim(fgets(STDIN));
+            $juego["puntosCirculo"] = trim(fgets(STDIN));
             break;
+
         case 2:  //mostrar un juego en pantalla
-            echo ("Ingrese un número de juego:"); 
-            $nJuego = trim(fgets(STDIN));
+            $minimo = 1;
+            $maximo = count($coleccionJuegos);
+            $nJuego = solicitarValor ($minimo, $maximo); 
             $juego = cargarJuegos (); //le asigno la coleccion que esta dentro de cargarJuegos
             datosJuego($juego[$nJuego -1] , $nJuego);  //le paso el juego con nro seleccionado a la funcion 
             break;
+
         case 3:   //mostrar el primer juego ganador
             echo"ingrese nombre del jugador ";
             $nombrebuscado =trim(fgets(STDIN));
