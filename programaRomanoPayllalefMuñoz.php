@@ -152,33 +152,30 @@ function agregarjuego($agregarjuego, $nombre, $simbolo, $puntos){
  * @return int
  */
 
-/**  recibe por parametro una coleccion de juegos y el nombre de un jugador para retornar el resumen de la estructura b    
- * @param array $coleccionDeJuegos
+/**  recibe por parametro una coleccion de juegos y el nombre de un jugador para retornar el resumen de la estructura b
+ * @param array $coleccionJuegos
  * @param string $nombreJugador
  * @var int $puntosJug0 , $puntosJugx, $i 
  * @return STRING
- */
-function resumenJugador($coleccionDeJuegos, $nombreJugador)
-{
+*/
+function resumenJugador($coleccionJuegos,$nombreJugador){
+    //string $resumenDeJugador
     $nombreJugador = strtoupper($nombreJugador);
-    $tamañoArreglo = count($coleccionDeJuegos);
+    $tamañoArreglo = count($coleccionJuegos);
     $i = 0;
     $puntosJug0 = 0;
     $puntosJugx = 0;
-    while ($i < $tamañoArreglo) {
-        //evaluamos si el jugador participo en X o en O
-        if ($coleccionDeJuegos[$i]["jugadorCruz"] == $nombreJugador) {
-            $puntosJugx = $puntosJugx + $coleccionDeJuegos[$i]["puntosCruz"];
-        } elseif ($coleccionDeJuegos[$i]["jugadorCirculo"] == $nombreJugador) {
-            $puntosJug0 = $puntosJug0 + $coleccionDeJuegos[$i]["puntosCirculo"];
+    while($i < $tamañoArreglo){
+    //evaluamos si el jugador participo en X o en O
+        if($coleccionJuegos[$i]["jugadorCruz"] == $nombreJugador){
+        $puntosJugx = $puntosJugx + $coleccionJuegos[$i]["puntosCruz"];
+        } 
+        elseif($coleccionJuegos[$i]["jugadorCirculo"] == $nombreJugador){
+        $puntosJug0 = $puntosJug0 + $coleccionJuegos[$i]["puntosCirculo"];
         }
-        $i = $i + 1;
+        $i = $i +1;
     }
-    $resumenDeJugador = ("nombre jugador: " . $nombreJugador . "\n
-puntos como jugador cruz: " . $puntosJugx . "\n
-puntos como jugador circulo: " . $puntosJug0 . "\n
-puntos en total: " . $puntosJug0 + $puntosJugx . "");
-    return $resumenDeJugador;
+    
 }
 
 /**
