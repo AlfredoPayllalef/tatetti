@@ -128,19 +128,19 @@ function datosJuego($juego, $numJuego)
     echo "********\n";
 }
 
-/**esta funcion agrega otra partida.
- * @param array $agregarJuego 
- * @param string $nombre
- * @param string $simbolo
- * @param int $puntos
+/** esta funcion agrega otra partida a la coleccion
+ * @param array $coleccionJuegos 
+ * @param string $nombreJugadorX, $nombreJugadorO
+ * @param int $puntos $puntosX, $puntosO
  * @return array
  */
-
-function agregarJuego($agregarjuego, $nombre, $simbolo, $puntos)
-{
-     $i=count($agregarjuego);
-     $agregarjuego[$i]=[$nombre,$simbolo,$puntos];
-     return $agregarjuego;
+function agregarJuego($coleccionJuegos, $nombreJugadorX, $nombreJugadorO, $puntosX, $puntosO)
+ {
+     // array $coleccionJuegos
+    $cantidadElementos = count($coleccionJuegos);
+    $nuevoJuego=["jugadorCruz"=> $nombreJugadorX , "jugadorCirculo" => $nombreJugadorO, "puntosCruz"=> $puntosX, "puntosCirculo" => $puntosO];
+    $coleccionJuegos [$cantidadElementos] = $nuevoJuego; 
+    return $coleccionJuegos;
 }
 
 /**
@@ -356,19 +356,15 @@ function arregloResumenJugador($nombre,$juegosGanados,$juegosPerdidos, $juegosEm
 
 //Declaración de variables:
 //array $coleccionJuegos, $juego
-//int $nJuego, $maximo, $minimo
-//string $nombreBuscado, $simboloElegido
+//int $nJuego, $maximo, $minimo, $porcentaje, $cantidadJuegos, $juegosGanados
+
 
 //Inicialización de variables:
 
 
 //Proceso:
-//Declaración de variables:
-//array $coleccionJuegos, $juego
 //int $nJuego, $porcentaje, $cantidadJuegos, $juegosGanados
 //string $nombreBuscado
-
-//Inicialización de variables:
 
 
 $coleccionJuegos = cargarJuegos (); // Inicializo la coleccion de juegos
@@ -378,24 +374,28 @@ do {
 
     switch ($opcion) { //corresponde a una estructura de control alternativa (if) 
             //para evitar comparar a la misma variable (opcion) con valores diferentes
-        case 1:  //jugar al tateti, el usuario ingresa nombre y elige simbolo
-            $juego = jugar();
-            print_r($juego);
-            imprimirResultado($juego);
-            //guardar datos en estructura de datos  $arregloJuegos, o $juego
-            $juego[ "jugadorCruz"] = trim(fgets(STDIN));
-            $juego["jugadorCirculo"] = trim(fgets(STDIN));
-            $juego["puntosCruz"]= trim(fgets(STDIN));
-            $juego["puntosCirculo"] = trim(fgets(STDIN));
+            case 1:  //jugar al tateti, el usuario ingresa nombre y elige simbolo
+                $juego = jugar();
+                print_r($juego); 
+                imprimirResultado($juego);
+                $nombreJugadorX = $juego["jugadorCruz"];
+                $nombreJugadorO = $juego["jugadorCirculo"];
+                $puntosX = $juego["puntosCruz"];
+                $puntosO = $juego ["puntosCirculo"];
+                $coleccionJuegos = agregarJuego($coleccionJuegos,$nombreJugadorX, $nombreJugadorO, $puntosX, $puntosO); //agrego el juego nuevo a la coleccion
+                
             break;
 
         case 2:  //mostrar un juego en pantalla
-            $minimo = 1;
-            $maximo = count($coleccionJuegos);
-            $nJuego = solicitarValor ($minimo, $maximo); 
-            $juego = cargarJuegos (); //le asigno la coleccion que esta dentro de cargarJuegos
-            datosJuego($juego[$nJuego -1] , $nJuego);  //le paso el juego con nro seleccionado a la funcion 
-            break;
+                $min = 1;
+                $max = count($coleccionJuegos); //Obtengo la cantidad maxima de elementos que tiene el arreglo
+                $numeroJuego = solicitarValor( $min, $max); //le solicito el valor y verifico que sea correcto
+                echo "NUMERO DEVUELTO" .$numeroJuego;
+                if ($numeroJuego) {
+                    datosJuego($coleccionJuegos[$numeroJuego -1] , $numeroJuego);  //le paso el juego con nro seleccionado a la funcion 
+                }
+    
+                break;
 
         case 3:   //mostrar el primer juego ganador
             echo"ingrese nombre del jugador ";
