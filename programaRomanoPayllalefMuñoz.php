@@ -339,14 +339,27 @@ function ordenarO($arrayJuegos){
 
 $coleccionJuegos = cargarJuegos (); // Inicializo la coleccion de juegos
 
+/*
+echo("COLLECIÓN DE JUEGOS: \n");
+
+foreach($coleccionJuegos as $jugada){
+    // https://www.php.net/manual/en/function.print-r.php
+    // print_r($value): string
+    print_r($jugada);
+}
+*/
+
 do {
     $opcion = (seleccionarOpcion());
 
-    if ($opcion == 2) { //Se le solicita al usuario un número de juego
+    if ($opcion == 1) { // Inicia el juego
+        $coleccionJuegos = cargarJuegos (); // Inicializo la coleccion de juegos
+        echo"Juego inicializado con éxito.\n";
+    }elseif ($opcion == 2) { //Se le solicita al usuario un número de juego
         //funcion solicitarValor (primer juego, ultimo juego)
         echo ("Ingrese un número de juego:"); //el numero de juego debe ser valido
         $nJuego = trim(fgets(STDIN));
-        $datosJuego1 = datosJuego($juego, $nJuego);
+        $datosJuego1 = datosJuego($coleccionJuegos, $nJuego);
         
 
 
@@ -371,64 +384,10 @@ do {
 
     } else { //salir del programa
         echo "  Saliendo del Programa ...\n";
-        sleep(4);  //a los 4s va a salir del programa
+        sleep(2);  //a los 4s va a salir del programa
+        exit();
     }
 
 } while ($opcion);
 //                   FIN
-
-
-
-
-
-
-
-
-
-/*do //{
-    $opcion = ...;
-
-    
-    //switch ($opcion) {
-        case 1: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
-
-            break;
-        case 2:  //mostrar un juego en pantalla
-            echo ("Ingrese un número de juego:"); 
-            $nJuego = trim(fgets(STDIN));
-            $juego = cargarJuegos (); //le asigno la coleccion que esta dentro de cargarJuegos
-            datosJuego($juego[$nJuego] , $nJuego);  //le paso el juego con nro seleccionado a la funcion 
-            break;
-        case 3:   //mostrar el primer juego ganador
-            echo"ingrese nombre del jugador ";
-        $nombrebuscado =trim(fgets(STDIN));
-        $coleccionJuegos = cargarJuegos ();
-        $primerGanado = buscarPimerGanado($coleccionJuegos,$nombrebuscado);
-        echo"el primer juego ganado es el \n".$primerGanado;
-
-
-            break;
-        
-        case 4: //mostrar porcentaje de juegos ganados
-            $cantidadJuegos = count($coleccionJuegos); 
-            $juegosGanados = juegosConGanador($coleccionJuegos) ;
-            $porcentaje = $juegosGanados * 100 / $cantidadJuegos ;
-            echo "el porcentaje de juegos ganados es:" .$porcentaje. "% \n";
-            break;
-        case 5: //mostrar resumen de 
-            // muestra en pantalla un resumen de los juegos ganados, los juegos perdidos, empates y acumulado de puntos
-            //funcion resumenJugador
-            echo ("Ingrese el nombre del jugador:");
-            $nombreResumen = trim(fgets(STDIN));
-            break;
-        case 6:     //mostrar listado de juegos ordenado por jugador O    
-            break;
-        }
-} while ($opcion != 7);
-
-//               FIN
-
-//salir del programa   como hago para poner esto en una instruccion switch? 
-        //echo "  Saliendo del Programa ...\n";
-        //sleep(4);  //a los 4s va a salir del programa 
+?>
