@@ -138,7 +138,7 @@ function datosJuego($juego, $numJuego)
 
 function agregarjuego($arrayColeccion, $nombreJugador1, $puntosJugador1,$nombreJugador2,$puntosJugador2){
      $i=count($arrayColeccion);
-     $arrayColeccion[$i]=[$nombreJugador1, $puntosJugador1,$nombreJugador2,$puntosJugador2];
+     $arrayColeccion[$i]=["jugadorCruz"=>$nombreJugador1,"jugadorCirculo"=>$puntosJugador1,"puntosCruz"=>$nombreJugador2,"puntosCirculo"=>$puntosJugador2];
      return $arrayColeccion;
 }
 
@@ -382,7 +382,6 @@ $coleccionJuegos = cargarJuegos (); // Inicializo la coleccion de juegos
  
 do {
     $opcion = (seleccionarOpcion());
- 
     switch ($opcion) { //corresponde a una estructura de control alternativa (if)
             //para evitar comparar a la misma variable (opcion) con valores diferentes
         case 1:  //jugar al tateti, el usuario ingresa nombre y elige simbolo
@@ -390,11 +389,12 @@ do {
             print_r($juego);
             imprimirResultado($juego);
             //guardar datos en estructura de datos  $arregloJuegos, o $juego
-            $juego[ "jugadorCruz"] = trim(fgets(STDIN));
-            $juego["jugadorCirculo"] = trim(fgets(STDIN));
-            $juego["jugadorCirculo"]= trim(fgets(STDIN));
-            $juego["puntosCirculo"] = trim(fgets(STDIN));
-            $coleccionJuegos=agregarjuego($coleccionJuegos, $juego[ "jugadorCruz"], $juego["jugadorCirculo"],$juego["jugadorCirculo"],$juego["puntosCirculo"]);
+            $jugadorX=$juego[ "jugadorCruz"];
+            $jugadorC=$juego["jugadorCirculo"];
+            $puntosX=$juego["puntosCruz"];
+            $puntosC=$juego["puntosCirculo"];
+
+            $coleccionJuegos=agregarjuego($coleccionJuegos,$jugadorX,$jugadorC,$puntosX,$puntosC);
             break;
         case 2:  //mostrar un juego en pantalla
             echo ("Ingrese un número de juego:");
