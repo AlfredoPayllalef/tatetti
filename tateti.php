@@ -440,4 +440,5 @@ function jugar()
     ];
 
     return $juego;
+    
 }
