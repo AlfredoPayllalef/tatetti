@@ -231,7 +231,7 @@ function cmp($juegoA, $juegoB) {//$juegoA,juegoB
     return $orden;
 }
 
-function OrdenarO($arrayJuegos){
+function ordenarO($arrayJuegos){
     uasort($arrayJuegos, 'cmp');
     print_r($arrayJuegos);
 }
