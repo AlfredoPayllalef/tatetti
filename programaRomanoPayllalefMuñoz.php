@@ -183,30 +183,6 @@ return $resumenDeJugador;
 }
 
 /**
- * este modulo solicita al usuario un simbolo X o O, valida el dato ingresado y retorna el simbolo elegido
- * @var STRING $simbolo, $simboloIngresado
- * @var boolean $bandera
- */
-function solicitaSimbolo(){
-    $bandera = true;
-    $simbolo = "";
-   
-     while($bandera){
-    echo("ingrese un simbolo (X - O)");
-    $simboloIngresado = trim(fgets(STDIN));
-    $simboloIngresado = strtoupper($simboloIngresado);
-    if(($simboloIngresado == "X")||($simboloIngresado == "O")){
-$simbolo = $simboloIngresado;
-$bandera = false;
-    }
-    else{
-echo("el simbolo no coincide con las opciones permitidas. Reintente otra vez");
-    }
-    }
-    return $simbolo;
-}
-
-/**
  * Dada una coleccion de juegos retorna la cantidad de juegos que tuvieron ganador (no empatados)
  * @param array $colecJuegos
  * @var int $juegosGanados, $i, $tamañoArreglo, $cantCruz, $cantCirculo
@@ -334,6 +310,8 @@ function ordenarO($arrayJuegos){
 //Inicialización de variables:
 
 
+//Proceso:
+
 $coleccionJuegos = cargarJuegos (); // Inicializo la coleccion de juegos
 
 do {
@@ -399,10 +377,12 @@ do {
             break;
         case 3:   //mostrar el primer juego ganador
             echo"ingrese nombre del jugador ";
-            $nombrebuscado =trim(fgets(STDIN));
-            $coleccionJuegos = cargarJuegos ();
-            $primerGanado = buscarPimerGanado($coleccionJuegos,$nombrebuscado);
-            echo"el primer juego ganado es el \n".$primerGanado;
+        $nombrebuscado =trim(fgets(STDIN));
+        $coleccionJuegos = cargarJuegos ();
+        $primerGanado = buscarPimerGanado($coleccionJuegos,$nombrebuscado);
+        echo"el primer juego ganado es el \n".$primerGanado;
+
+
             break;
         
         case 4: //mostrar porcentaje de juegos ganados
