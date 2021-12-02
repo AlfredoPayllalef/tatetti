@@ -41,6 +41,20 @@ function cargarJuegos (){
     $coleccionJuegos [8]= $juego9;
     $coleccionJuegos [9]= $juego10;
     
+    $coleccionJuegos = [];
+    $jg1 = ["jugadorCruz" => "AMARILIS", "jugadorCirculo" => "MILOS",    "puntosCruz" => 1, "puntosCirculo" => 1];
+    $jg2 = ["jugadorCruz" => "ZENDA",    "jugadorCirculo" => "AMARILIS", "puntosCruz" => 3, "puntosCirculo" => 0];
+    $jg3 = ["jugadorCruz" => "ZENDA",    "jugadorCirculo" => "MILOS",    "puntosCruz" => 0, "puntosCirculo" => 4];
+    $jg4 = ["jugadorCruz" => "CALIXTO",  "jugadorCirculo" => "TRUMAN",   "puntosCruz" => 1, "puntosCirculo" => 1];
+    $jg5 = ["jugadorCruz" => "AMARILIS", "jugadorCirculo" => "MILOS",    "puntosCruz" => 5, "puntosCirculo" => 0];
+    $jg6 = ["jugadorCruz" => "FEDORA",   "jugadorCirculo" => "CALIXTO",  "puntosCruz" => 0, "puntosCirculo" => 3];
+    $jg7 = ["jugadorCruz" => "TRUMAN",   "jugadorCirculo" => "AMARILIS", "puntosCruz" => 4, "puntosCirculo" => 0];
+    $jg8 = ["jugadorCruz" => "CALIXTO",  "jugadorCirculo" => "TRUMAN",   "puntosCruz" => 1, "puntosCirculo" => 1];
+    $jg9 = ["jugadorCruz" => "TRUMAN",   "jugadorCirculo" => "FEDORA",   "puntosCruz" => 2, "puntosCirculo" => 0];
+    $jg10= ["jugadorCruz" => "MILOS",    "jugadorCirculo" => "ZENDA",   "puntosCruz" => 1, "puntosCirculo" => 1];
+
+array_push($coleccionJuegos, $jg1, $jg2, $jg3, $jg4, $jg5, $jg6, $jg7, $jg8, $jg9, $jg10);
+
     return ($coleccionJuegos);
 //print_r($juego3); para que me muestre los resultados de las colecciones
 }
@@ -200,8 +214,8 @@ function solicitaSimbolo(){
     $simboloIngresado = trim(fgets(STDIN));
     $simboloIngresado = strtoupper($simboloIngresado);
     if(($simboloIngresado == "X")||($simboloIngresado == "O")){
-$simbolo = $simboloIngresado;
-$bandera = false;
+    $simbolo = $simboloIngresado;
+    $bandera = false;
     }
     else{
 echo("el simbolo no coincide con las opciones permitidas. Reintente otra vez");
@@ -319,15 +333,13 @@ do {
             echo ("Ingrese el nombre del jugador:");
             $nombreResumen = trim(fgets(STDIN));
 
-
             break;
         case 6:     //mostrar listado de juegos ordenado por jugador O    
             break;
         }
 } while ($opcion != 7);
+        echo "  Saliendo del Programa ...\n";
+        sleep(4);  //a los 4s va a salir del programa 
 
 //               FIN
 
-//salir del programa   como hago para poner esto en una instruccion switch? 
-        //echo "  Saliendo del Programa ...\n";
-        //sleep(4);  //a los 4s va a salir del programa 
