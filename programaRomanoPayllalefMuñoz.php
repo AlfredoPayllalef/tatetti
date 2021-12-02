@@ -30,16 +30,32 @@ function cargarJuegos (){
     $juego10=["jugadorCruz"=> "MARTIN" , "jugadorCirculo" => "FEDE", "puntosCruz"=> 1, "puntosCirculo" => 1];
   
     $coleccionJuegos = []; //inicializo el arreglo $coleccionJuegos
-    $coleccionJuegos [0]= $juego1;
-    $coleccionJuegos [1]= $juego2;
-    $coleccionJuegos [2]= $juego3;
-    $coleccionJuegos [3]= $juego4;
-    $coleccionJuegos [4]= $juego5;
-    $coleccionJuegos [5]= $juego6;
-    $coleccionJuegos [6]= $juego7;
-    $coleccionJuegos [7]= $juego8;
-    $coleccionJuegos [8]= $juego9;
-    $coleccionJuegos [9]= $juego10;
+    $coleccionJuegos[0]= $juego1;
+    $coleccionJuegos[1]= $juego2;
+    $coleccionJuegos[2]= $juego3;
+    $coleccionJuegos[3]= $juego4;
+    $coleccionJuegos[4]= $juego5;
+    $coleccionJuegos[5]= $juego6;
+    $coleccionJuegos[6]= $juego7;
+    $coleccionJuegos[7]= $juego8;
+    $coleccionJuegos[8]= $juego9;
+    $coleccionJuegos[9]= $juego10;
+
+    $coleccionJuegos = [];
+
+    $jg1 = ["jugadorCruz" => "AMARILIS", "jugadorCirculo" => "MILOS",    "puntosCruz" => 1, "puntosCirculo" => 1];
+    $jg2 = ["jugadorCruz" => "ZENDA",    "jugadorCirculo" => "AMARILIS", "puntosCruz" => 3, "puntosCirculo" => 0];
+    $jg3 = ["jugadorCruz" => "ZENDA",    "jugadorCirculo" => "MILOS",    "puntosCruz" => 0, "puntosCirculo" => 4];
+    $jg4 = ["jugadorCruz" => "CALIXTO",  "jugadorCirculo" => "TRUMAN",   "puntosCruz" => 1, "puntosCirculo" => 1];
+    $jg5 = ["jugadorCruz" => "AMARILIS", "jugadorCirculo" => "MILOS",    "puntosCruz" => 5, "puntosCirculo" => 0];
+    $jg6 = ["jugadorCruz" => "FEDORA",   "jugadorCirculo" => "CALIXTO",  "puntosCruz" => 0, "puntosCirculo" => 3];
+    $jg7 = ["jugadorCruz" => "TRUMAN",   "jugadorCirculo" => "AMARILIS", "puntosCruz" => 4, "puntosCirculo" => 0];
+    $jg8 = ["jugadorCruz" => "CALIXTO",  "jugadorCirculo" => "TRUMAN",   "puntosCruz" => 1, "puntosCirculo" => 1];
+    $jg9 = ["jugadorCruz" => "TRUMAN",   "jugadorCirculo" => "FEDORA",   "puntosCruz" => 2, "puntosCirculo" => 0];
+    $jg10= ["jugadorCruz" => "MILOS",    "jugadorCirculo" => "ZENDA",   "puntosCruz" => 1, "puntosCirculo" => 1];
+
+    array_push($coleccionJuegos, $jg1, $jg2, $jg3, $jg4, $jg5, $jg6, $jg7, $jg8, $jg9, $jg10);
+
     
     return ($coleccionJuegos);
 //print_r($juego3); para que me muestre los resultados de las colecciones
@@ -165,24 +181,60 @@ function arregloResumenJugador($nombre,$juegosGanados,$juegosPerdidos, $juegosEm
  * @param string $nombre
  * @return int $primerGanado
  * */
-function buscarPimerGanado($array,$nombre){
-    $n=count($array);
+function buscarPimerGanado($arrayColeccion,$nombre){
+    $n=count($arrayColeccion);//busca la dimencion del array
     $i=0;
     $bandera= true;
-    while ($i <$n && $bandera) { 
-        if ($array[$i][0]=$nombre) {
-            if($array[$i][2]>1)
-                $primerGanado=$i;
-                $bandera= false;
-        }else{
-            $primerGanado=-1;
-            $i=$i+1;
-        }
+    while ($i <$n && $bandera) { //recorre el cada arreglo 
+        $j="jugadorCruz";
+        $bandera2=true;
+        while ($bandera2==true) { //recorre los primeros dos elemntos del arreglo
+            if ($arrayColeccion[$i][$j]==$nombre) {
+                if($arrayColeccion[$i]["puntosCruz"]>1 or $arrayColeccion[$i]["puntosCirculo"]>1 ){
+                    $primerGanado=$i;
+                    $bandera= false;
+                    $bandera2=false;
+                }else{
+                    if ($j=="jugadorCirculo") {
+                        $primerGanado=-1;
+                        $bandera2=false;
+                    }else{
+                    $primerGanado=-1;
+                    $j="jugadorCirculo";
+                    $bandera2=true;
+                    }
+                }   
+            }else{
+                if ($j=="jugadorCirculo") {
+                    $primerGanado=-1;
+                    $bandera2=false;
+                }else{
+                $primerGanado=-1;
+                $j="jugadorCirculo";
+                $bandera2=true;
+                }
+            }
+        }$i=$i+1;  
     }
     return $primerGanado;
 }
 
+function cmp($juegoA, $juegoB) {//$juegoA,juegoB
+    if ($juegoA["jugadorCirculo"] == $juegoB["jugadorCirculo"]) {
+        $orden=0;
+    }
+    elseif($juegoA["juegoCirculo"]<$juegoB["jugadorCirculo"]) {
+        $oreden=-1;
+    } else {
+        $orden=1;
+    }
+    return $orden;
+}
 
+function OrdenarO($arrayJuegos){
+    uasort($arrayJuegos, 'cmp');
+    print_r($arrayJuegos);
+}
 /****************************************** PROGRAMA PRINCIPAL **********************************************/
 
 
@@ -216,7 +268,7 @@ do {
         echo"ingrese nombre del jugador ";
         $nombrebuscado=trim(fgets(STDIN));
         $primerGanado = buscarPimerGanado($coleccionJuegos,$nombrebuscado);
-        echo"el primer juego ganado es el \n".$primerGanado;
+        echo"el primer juego ganado es el \n".$primerGanado."\n";
 
     } elseif ($opcion == 4) { //mostrar porcentaje de juegos ganados
 
