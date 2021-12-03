@@ -143,39 +143,6 @@ function agregarJuego($coleccionJuegos, $nombreJugadorX, $nombreJugadorO, $punto
     return $coleccionJuegos;
 }
 
-
-/**  recibe por parametro una coleccion de juegos y el nombre de un jugador para retornar el resumen de la estructura b    
- * @param array $coleccionJuegos
- * @param string $nombreJugador
- * @var int $puntosJug0 , $puntosJugx, $i
- * @var array $resumen
- * @return array
- */
-/*function resumenJugador($coleccionJuegos, $nombreJugador)
-{   //array $resumen
-    $nombreJugador = strtoupper($nombreJugador);
-    $tamañoArreglo = count($coleccionJuegos);
-    $i = 0;
-    $puntosJug0 = 0;
-    $puntosJugx = 0;
-    $resumen = [];
-    while ($i < $tamañoArreglo) {
-        //evaluamos si el jugador participo en X o en O
-        if ($coleccionJuegos[$i]["jugadorCruz"] == $nombreJugador) {
-            $puntosJugx = $puntosJugx + $coleccionJuegos[$i]["puntosCruz"];
-        } elseif ($coleccionJuegos[$i]["jugadorCirculo"] == $nombreJugador) {
-            $puntosJug0 = $puntosJug0 + $coleccionJuegos[$i]["puntosCirculo"];
-        }
-        $i = $i + 1;
-    }
-   
-    $resumen[0] = $nombreJugador;
-    $resumen[1] = $puntosJugx;
-    $resumen[2] = $puntosJug0;
-    $resumen[3] = $puntosJug0 + $puntosJugx;
-    return $resumen;
-}
-*/
 /**  recibe por parametro una coleccion de juegos y el nombre de un jugador para retornar el resumen de la estructura b    
  * @param array $coleccionJuegos
  * @param string $nombreJugador
@@ -191,10 +158,10 @@ function resumenJugador($coleccionJuegos, $nombreJugador)
     $juegosPerdidos = 0;
     $puntosAcumulados = 0;
     foreach ($coleccionJuegos as $juego){
-        if ($juego["jugadorCruz"] === $nombreJugador){
+        if ($juego["jugadorCruz"] === $nombreJugador){ //son iguales y ademas del mismo tipo
             if ($juego["puntosCruz"] > $juego["puntosCirculo"]){
                 // Gano Cruz
-                $juegosGanados++;
+                $juegosGanados++; 
             } else if ($juego["puntosCirculo"] > $juego["puntosCruz"]) {
                 // Gano Circulo
                 $juegosPerdidos++;
@@ -203,10 +170,10 @@ function resumenJugador($coleccionJuegos, $nombreJugador)
                 $juegosEmpatados++;
             }
             $puntosAcumulados = $puntosAcumulados + $juego["puntosCruz"];
-        } else if ($juego["jugadorCirculo"] === $nombreJugador){
+        } else if ($juego["jugadorCirculo"] === $nombreJugador){ //son iguales y ademas del mismo tipo
             if ($juego["puntosCirculo"] > $juego["puntosCruz"]){
                 // Gano Circulo
-                $juegosGanados++;
+                $juegosGanados++;  
             } else if ($juego["puntosCruz"] > $juego["puntosCirculo"]) {
                 // Gano Cruz
                 $juegosPerdidos++;
@@ -219,10 +186,10 @@ function resumenJugador($coleccionJuegos, $nombreJugador)
         
     }
     $resumen = ["nombre" => $nombreJugador,
-    "juegosGanados" => $juegosGanados,
-    "juegosPerdidos" => $juegosPerdidos,
-    "juegosEmpatados" => $juegosEmpatados,
-    "puntosAcumulados" => $puntosAcumulados
+                "juegosGanados" => $juegosGanados,
+                "juegosPerdidos" => $juegosPerdidos,
+                "juegosEmpatados" => $juegosEmpatados,
+                "puntosAcumulados" => $puntosAcumulados
     ];
     
     return $resumen;
@@ -238,8 +205,9 @@ function solicitaSimbolo()
     $bandera = true;
     $simbolo = "";
    
-    while($bandera){
-        echo("ingrese un simbolo (X - O) ");
+    while($bandera)
+    {
+        echo("Ingrese un simbolo (X - O): ");
         $simboloIngresado = trim(fgets(STDIN));
         $simboloIngresado = strtoupper($simboloIngresado); //convierte a Mayusculas el simbolo ingresado
         if(($simboloIngresado == "X")||($simboloIngresado == "O")){
@@ -273,31 +241,6 @@ function juegosConGanador($colecJuegos)
         }
     }
     return $juegosGanados;
-}
-
-/**
- * este modulo solicita al usuario un simbolo X o O, valida el dato ingresado y retorna el simbolo elegido
- * @param STRING $simbolo, $simboloIngresado
- * @param boolean $bandera
- */
-function solicitaSimbolo1()
-{
-    $bandera = true;
-    $simbolo = "";
-
-    while ($bandera) {
-        echo ("Por favor ingrese un simbolo (X - O): ");
-        
-        $simboloIngresado = trim(fgets(STDIN));
-        $simboloIngresado = strtoupper($simboloIngresado);
-        if (($simboloIngresado == "X") || ($simboloIngresado == "O")) {
-            $simbolo = $simboloIngresado;
-            $bandera = false;
-        } else {
-            echo ("El simbolo no coincide con las opciones permitidas. Reintente otra vez: ");
-        }
-    }
-    return $simbolo;
 }
 
 /**
