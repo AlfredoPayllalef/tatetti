@@ -346,7 +346,8 @@ function buscarPimerGanado($arrayColeccion,$nombre)
 }
 /**
  * funcion de comparacion
- * @param String|int $juegoA, $juegoB
+ * @param array $juegoA, $juegoB
+ * @var int $orden
  * @return int
  */
 function cmp($juegoA, $juegoB) 
@@ -361,7 +362,10 @@ function cmp($juegoA, $juegoB)
     }
     return $orden;
 }
-
+/**
+ * ordena y muestra en pantalla el arreglo en orden definido por la funcion comparacion (cmp) manteniendo la asociacion de indices
+ * @param array $arrayJuegos
+ */
 function ordenarO($arrayJuegos)
 {
     uasort($arrayJuegos, 'cmp');
