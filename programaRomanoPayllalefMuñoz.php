@@ -24,7 +24,7 @@ function cargarJuegos (){
     $juego4=["jugadorCruz"=> "CARLOS" , "jugadorCirculo" => "DANIEL", "puntosCruz"=> 1, "puntosCirculo" => 1];
     $juego5=["jugadorCruz"=> "RUBEN" , "jugadorCirculo" => "PAULA", "puntosCruz"=> 1, "puntosCirculo" => 1];
     $juego6=["jugadorCruz"=> "JOAQUIN" , "jugadorCirculo" => "SOL", "puntosCruz"=> 0, "puntosCirculo" => 4];
-    $juego7=["jugadorCruz"=> "MARIA" , "jugadorCirculo" => "MAJO", "puntosCruz"=> 0, "puntosCirculo" => 0];
+    $juego7=["jugadorCruz"=> "MARIA" , "jugadorCirculo" => "MAJO", "puntosCruz"=> 0, "puntosCirculo" => 5];
     $juego8=["jugadorCruz"=> "SOL" , "jugadorCirculo" => "JOAQUIN", "puntosCruz"=> 0, "puntosCirculo" => 3];
     $juego9=["jugadorCruz"=> "SOFIA" , "jugadorCirculo" => "BLANCA", "puntosCruz"=> 4, "puntosCirculo" => 0];
     $juego10=["jugadorCruz"=> "MARTIN" , "jugadorCirculo" => "FEDE", "puntosCruz"=> 1, "puntosCirculo" => 1];
@@ -407,14 +407,14 @@ do {
             echo"ingrese nombre del jugador: ";
             $nombreBuscado = strtoupper(trim(fgets(STDIN)));
             $primerGanado = buscarPimerGanado($coleccionJuegos,$nombreBuscado);
-            if ( $primerGanado <> -1){
+            if ( $primerGanado == -1){
+                echo "El jugador " .$nombreBuscado. " no gano ningún juego\n";      
+            } else {
                 echo "**************\n";
                 echo "Juego TATETI: " . ($primerGanado + 1)."\n" ;
                 echo "Jugador X: ".$coleccionJuegos[$primerGanado]["jugadorCruz"]." obtuvo " .$coleccionJuegos[$primerGanado]["puntosCruz"]." puntos\n";
                 echo "Jugador O: ".$coleccionJuegos[$primerGanado]["jugadorCirculo"]. " obtuvo " .$coleccionJuegos[$primerGanado]["puntosCirculo"]." puntos\n";
-                echo "**************\n";        
-            } else {
-                echo "El jugador " .$nombreBuscado. " no gano ningún juego\n";
+                echo "**************\n";   
             }
             break;
        
