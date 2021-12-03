@@ -98,7 +98,7 @@ function solicitarValor( $min, $max)
     //int $valor
     echo "Ingrese un valor (entre " .$min. " y ".$max. "):";
     $valor = trim(fgets(STDIN));
-    while ($valor < $min || $valor >$max ) {
+    while (!is_int($valor)&&($valor < $min || $valor >$max) ) {
         echo ("El valor no es valido, ingrese un valor valido: ");
         $valor = trim(fgets(STDIN));
     }
