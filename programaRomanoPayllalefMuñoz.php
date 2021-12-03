@@ -269,7 +269,7 @@ function buscarPimerGanado($arrayColeccion,$nombre)
         $bandera2=true;
         while ($bandera2==true) { //recorre los primeros dos elemntos del arreglo
             if ($arrayColeccion[$i][$j]==$nombre) {
-                if($arrayColeccion[$i]["puntosCruz"]>1 or $arrayColeccion[$i]["puntosCirculo"]>1 ){
+                if($arrayColeccion[$i]["puntosCruz"]>1 || $arrayColeccion[$i]["puntosCirculo"]>1 ){
                     $primerGanado=$i;
                     $bandera= false;
                     $bandera2=false;
@@ -349,7 +349,29 @@ function arregloResumenJugador($nombre,$juegosGanados,$juegosPerdidos, $juegosEm
 
    return $resumenJugador;
 }
-
+/** la funcion toma un simbolo ingresado por teclado y recorre el arreglo para contar las partidas ganadas por ese simbolo
+*@param array $arraycompleto
+*@param string $simbolo
+*@return int $cantidadGanadosSimbolo
+*/
+function JuegosGanadosSimbolo($arrayCompleto,$simbolo){
+    $cantidadGanadosSimbolo=0;
+    $n=count($arrayCompleto);
+    if ($simbolo==X) {
+         for ($i=0; $i <$n ;$i++) { 
+             if($arrayCompleto[$i]["puntosCruz"]>1){
+                    $cantidadGanadosSimbolo=$cantidadGanadosSimbolo+1;
+                }
+            }
+    }else {
+         for ($i=0; $i <$n ;$i++) { 
+         if($arrayCompleto[$i]["puntosCirculo"]>1){
+                    $cantidadGanadosSimbolo=$cantidadGanadosSimbolo+1;
+                }
+            }
+        }
+    return $cantidadGanadosSimbolo;
+}
 /****************************************** PROGRAMA PRINCIPAL **********************************************/
   
 //Declaración de variables:
@@ -393,7 +415,7 @@ do {
             break;
         case 3:   //mostrar el primer juego ganador
             echo"ingrese nombre del jugador ";
-            $nombrebuscado =trim(fgets(STDIN));
+            $nombrebuscado =strtoupper(trim(fgets(STDIN)));
             $coleccionJuegos = cargarJuegos ();
             $primerGanado = buscarPimerGanado($coleccionJuegos,$nombrebuscado);
             echo"el primer juego ganado es el \n".$primerGanado. "\n";
