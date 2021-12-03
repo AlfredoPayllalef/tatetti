@@ -119,6 +119,7 @@ function datosJuego($juego, $numJuego)
         $resultadoJuego="gano O ";
     }
     else {
+        $juego["puntosCruz"] == $juego["puntosCirculo"];
         $resultadoJuego="empate";
     }
     echo "********\n";
