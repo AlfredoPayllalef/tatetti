@@ -24,7 +24,7 @@ function cargarJuegos (){
     $juego4=["jugadorCruz"=> "CARLOS" , "jugadorCirculo" => "DANIEL", "puntosCruz"=> 1, "puntosCirculo" => 1];
     $juego5=["jugadorCruz"=> "RUBEN" , "jugadorCirculo" => "PAULA", "puntosCruz"=> 1, "puntosCirculo" => 1];
     $juego6=["jugadorCruz"=> "JOAQUIN" , "jugadorCirculo" => "SOL", "puntosCruz"=> 0, "puntosCirculo" => 4];
-    $juego7=["jugadorCruz"=> "MARIA" , "jugadorCirculo" => "MAJO", "puntosCruz"=> 5, "puntosCirculo" => 0];
+    $juego7=["jugadorCruz"=> "MARIA" , "jugadorCirculo" => "MAJO", "puntosCruz"=> 0, "puntosCirculo" => 0];
     $juego8=["jugadorCruz"=> "SOL" , "jugadorCirculo" => "JOAQUIN", "puntosCruz"=> 0, "puntosCirculo" => 3];
     $juego9=["jugadorCruz"=> "SOFIA" , "jugadorCirculo" => "BLANCA", "puntosCruz"=> 4, "puntosCirculo" => 0];
     $juego10=["jugadorCruz"=> "MARTIN" , "jugadorCirculo" => "FEDE", "puntosCruz"=> 1, "puntosCirculo" => 1];
@@ -241,7 +241,7 @@ function solicitaSimbolo()
     while($bandera){
         echo("Por favor ingrese un simbolo (X - O):");
         $simboloIngresado = trim(fgets(STDIN));
-        $simboloIngresado = strtoupper($simboloIngresado);
+        $simboloIngresado = strtoupper($simboloIngresado); //convierte a Mayusculas el simbolo ingresado
         if(($simboloIngresado == "X")||($simboloIngresado == "O")){
         $simbolo = $simboloIngresado;
         $bandera = false;
@@ -427,13 +427,16 @@ do {
             //$coleccionJuegos = cargarJuegos (); //no se incializa vacio porque si no no te tomaria los valores nuevos del paso 1
             $primerGanado = buscarPimerGanado($coleccionJuegos,$nombreBuscado);
             //echo"el primer juego ganado por ".$nombrebuscado." es el N° ".$primerGanado. "\n";
-            echo "**************\n";
-            echo "Juego TATETI:" . ($primerGanado)."\n" ;
-            echo "Jugador X: ".$coleccionJuegos[$primerGanado]["jugadorCruz"]." obtuvo " .$coleccionJuegos[$primerGanado]["puntosCruz"]." puntos\n";
-            echo "Jugador O: ".$coleccionJuegos[$primerGanado]["jugadorCirculo"]. " obtuvo " .$coleccionJuegos[$primerGanado]["puntosCirculo"]." puntos\n";
-            echo "**************\n";
-            // falta la parte de que si el jugador no gano ningun juego debe decir
-            //echo "El jugador " .$nombreBuscado. "no gano ningún juego";  
+            if ( $primerGanado <> -1){
+                echo "**************\n";
+                echo "Juego TATETI:" . ($primerGanado)."\n" ;
+                echo "Jugador X: ".$coleccionJuegos[$primerGanado]["jugadorCruz"]." obtuvo " .$coleccionJuegos[$primerGanado]["puntosCruz"]." puntos\n";
+                echo "Jugador O: ".$coleccionJuegos[$primerGanado]["jugadorCirculo"]. " obtuvo " .$coleccionJuegos[$primerGanado]["puntosCirculo"]." puntos\n";
+                echo "**************\n";
+            //falta la parte de que si el jugador no gano ningun juego debe decir algo        
+            } else {
+                echo "El jugador " .$nombreBuscado. " no gano ningún juego\n";
+            }
             break;
        
         case 4: //mostrar porcentaje de juegos ganados
