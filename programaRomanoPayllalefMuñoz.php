@@ -421,7 +421,7 @@ do {
             $nombrebuscado =strtoupper(trim(fgets(STDIN)));
             $coleccionJuegos = cargarJuegos ();
             $primerGanado = buscarPimerGanado($coleccionJuegos,$nombrebuscado);
-            echo"el primer juego ganado es el \n".$primerGanado. "\n";
+        echo"el primer juego ganado por ".$nombrebuscado." es el N° ".$primerGanado. "\n";
  
             break;
        
