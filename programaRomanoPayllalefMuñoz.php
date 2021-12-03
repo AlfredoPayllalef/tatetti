@@ -374,30 +374,7 @@ function arregloResumenJugador($nombre,$juegosGanados,$juegosPerdidos, $juegosEm
    "juegosEmpatados"=> $juegosEmpatados, "puntosAcumulados"=> $puntosAcumulados];
 
    return $resumenJugador;
-}
-/** la funcion toma un simbolo ingresado por teclado y recorre el arreglo para contar las partidas ganadas por ese simbolo
-*@param array $arraycompleto
-*@param string $simbolo
-*@return int $cantidadGanadosSimbolo
-*/
-function JuegosGanadosSimbolo($arrayCompleto,$simbolo){
-    $cantidadGanadosSimbolo=0;
-    $n=count($arrayCompleto);
-    if ($simbolo==X) {
-         for ($i=0; $i <$n ;$i++) { 
-             if($arrayCompleto[$i]["puntosCruz"]>1){
-                    $cantidadGanadosSimbolo=$cantidadGanadosSimbolo+1;
-                }
-            }
-    }else {
-         for ($i=0; $i <$n ;$i++) { 
-         if($arrayCompleto[$i]["puntosCirculo"]>1){
-                    $cantidadGanadosSimbolo=$cantidadGanadosSimbolo+1;
-                }
-            }
-        }
-    return $cantidadGanadosSimbolo;
-}
+
 /****************************************** PROGRAMA PRINCIPAL **********************************************/
   
 //Declaración de variables:
