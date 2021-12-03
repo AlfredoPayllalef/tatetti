@@ -300,9 +300,9 @@ function buscarPimerGanado($arrayColeccion,$nombre)
 function cmp($juegoA, $juegoB) 
 {   //$juegoA,juegoB, int $orden
     $orden=0;
-    if ($juegoA["jugadorCirculo"] == $juegoB["jugadorCruz"]) {
+    if ($juegoA["jugadorCirculo"] == $juegoB["jugadorCirculo"]) {
         $orden = 0;
-    } elseif ($juegoA["jugadorCirculo"] < $juegoB["jugadorCruz"]) {
+    } elseif ($juegoA["jugadorCirculo"] < $juegoB["jugadorCirculo"]) {
         $orden = -1;
     } else {
         $orden = 1;
