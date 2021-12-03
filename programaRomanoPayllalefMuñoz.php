@@ -143,6 +143,9 @@ function agregarJuego($coleccionJuegos, $nombreJugadorX, $nombreJugadorO, $punto
     return $coleccionJuegos;
 }
 
+
+
+
 /**  recibe por parametro una coleccion de juegos y el nombre de un jugador para retornar el resumen de la estructura b    
  * @param array $coleccionJuegos
  * @param string $nombreJugador
