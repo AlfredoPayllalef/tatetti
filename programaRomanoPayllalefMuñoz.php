@@ -374,7 +374,7 @@ function arregloResumenJugador($nombre,$juegosGanados,$juegosPerdidos, $juegosEm
    "juegosEmpatados"=> $juegosEmpatados, "puntosAcumulados"=> $puntosAcumulados];
 
    return $resumenJugador;
-
+}
 /****************************************** PROGRAMA PRINCIPAL **********************************************/
   
 //Declaración de variables:
@@ -457,3 +457,5 @@ do {
         }
 } while ($opcion != 7);
 //                   FIN
+
+?>
