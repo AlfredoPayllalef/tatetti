@@ -378,13 +378,6 @@ do {
 //                   FIN
 
 
-
-
-
-
-
-
-
 /*do //{
     $opcion = ...;
 
@@ -427,8 +420,8 @@ do {
         }
 } while ($opcion != 7);
 
-//               FIN
+//               FIN*/
 
-//salir del programa   como hago para poner esto en una instruccion switch? 
+/*salir del programa   como hago para poner esto en una instruccion switch? 
         //echo "  Saliendo del Programa ...\n";
-        //sleep(4);  //a los 4s va a salir del programa 
+        //sleep(4);  //a los 4s va a salir del programa  */
