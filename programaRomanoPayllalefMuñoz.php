@@ -19,12 +19,12 @@ function cargarJuegos (){
     //array $juego0 , $juego1, $juego2, $juego3, $juego4, $juego5, $juego6, $juego7, $juego8, $juego9
 
     $juego1=["jugadorCruz"=> "MAJO" , "jugadorCirculo" => "DAVID", "puntosCruz"=> 1, "puntosCirculo" => 1];
-    $juego2=["jugadorCruz"=> "PABLO" , "jugadorCirculo" => "SEBA", "puntosCruz"=> 0, "puntosCirculo" => 3];
+    $juego2=["jugadorCruz"=> "MAJO" , "jugadorCirculo" => "SEBA", "puntosCruz"=> 0, "puntosCirculo" => 3];
     $juego3=["jugadorCruz"=> "JUAN" , "jugadorCirculo" => "SOFIA", "puntosCruz"=> 0, "puntosCirculo" => 5];
     $juego4=["jugadorCruz"=> "CARLOS" , "jugadorCirculo" => "DANIEL", "puntosCruz"=> 1, "puntosCirculo" => 1];
     $juego5=["jugadorCruz"=> "RUBEN" , "jugadorCirculo" => "PAULA", "puntosCruz"=> 1, "puntosCirculo" => 1];
     $juego6=["jugadorCruz"=> "JOAQUIN" , "jugadorCirculo" => "SOL", "puntosCruz"=> 0, "puntosCirculo" => 4];
-    $juego7=["jugadorCruz"=> "MARIA" , "jugadorCirculo" => "MAJO", "puntosCruz"=> 5, "puntosCirculo" => 0];
+    $juego7=["jugadorCruz"=> "MARIA" , "jugadorCirculo" => "MAJO", "puntosCruz"=> 0, "puntosCirculo" => 5];
     $juego8=["jugadorCruz"=> "SOL" , "jugadorCirculo" => "JOAQUIN", "puntosCruz"=> 0, "puntosCirculo" => 3];
     $juego9=["jugadorCruz"=> "SOFIA" , "jugadorCirculo" => "BLANCA", "puntosCruz"=> 4, "puntosCirculo" => 0];
     $juego10=["jugadorCruz"=> "MARTIN" , "jugadorCirculo" => "FEDE", "puntosCruz"=> 1, "puntosCirculo" => 1];
@@ -316,7 +316,7 @@ function buscarPimerGanado($arrayColeccion,$nombre)
         $bandera2=true;
         while ($bandera2==true) { //recorre los primeros dos elemntos del arreglo
             if ($arrayColeccion[$i][$j]==$nombre) {
-                if($arrayColeccion[$i]["puntosCruz"]>1 || $arrayColeccion[$i]["puntosCirculo"]>1 ){
+                if($arrayColeccion[$i]["puntosCruz"]>1 && $arrayColeccion[$i]["jugadorCruz"]==$nombre || $arrayColeccion[$i]["puntosCirculo"]>1 && $arrayColeccion[$i]["jugadorCirculo"]==$nombre ){
                     $primerGanado=$i;
                     $bandera= false;
                     $bandera2=false;
