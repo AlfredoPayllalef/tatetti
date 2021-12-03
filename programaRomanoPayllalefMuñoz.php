@@ -283,7 +283,7 @@ function juegosConGanador($colecJuegos)
  * */
 function buscarPimerGanado($arrayColeccion,$nombre)
 {   //int $primerGanado
-    $n=count($arrayColeccion);//busca la dimencion del array
+    $n=count($arrayColeccion);//busca la dimension del array
     $i=0;
     $bandera= true;
     while ($i <$n && $bandera) { //recorre el cada arreglo 
@@ -422,17 +422,18 @@ do {
           
             break;
         case 3:   //mostrar el primer juego ganador
-            echo"ingrese nombre del jugador ";
-            $nombrebuscado =strtoupper(trim(fgets(STDIN)));
-            $coleccionJuegos = cargarJuegos (); //creo que no se incializa porque si no no te tomaria los valores nuevos del paso 1
-            $primerGanado = buscarPimerGanado($coleccionJuegos,$nombrebuscado);
+            echo"ingrese nombre del jugador: ";
+            $nombreBuscado =strtoupper(trim(fgets(STDIN)));
+            //$coleccionJuegos = cargarJuegos (); //no se incializa vacio porque si no no te tomaria los valores nuevos del paso 1
+            $primerGanado = buscarPimerGanado($coleccionJuegos,$nombreBuscado);
             //echo"el primer juego ganado por ".$nombrebuscado." es el N° ".$primerGanado. "\n";
             echo "**************\n";
             echo "Juego TATETI:" . ($primerGanado)."\n" ;
             echo "Jugador X: ".$coleccionJuegos[$primerGanado]["jugadorCruz"]." obtuvo " .$coleccionJuegos[$primerGanado]["puntosCruz"]." puntos\n";
             echo "Jugador O: ".$coleccionJuegos[$primerGanado]["jugadorCirculo"]. " obtuvo " .$coleccionJuegos[$primerGanado]["puntosCirculo"]." puntos\n";
             echo "**************\n";
- 
+            // falta la parte de que si el jugador no gano ningun juego debe decir
+            //echo "El jugador " .$nombreBuscado. "no gano ningún juego";  
             break;
        
         case 4: //mostrar porcentaje de juegos ganados
@@ -445,20 +446,20 @@ do {
             echo "El porcentaje de juegos ganados por " .$simboloElegido. " es: " .$porcentaje. "% \n";
  
             break;
-        case 5: //mostrar resumen de
+
+        case 5: 
             // muestra en pantalla un resumen de los juegos ganados, los juegos perdidos, empates y acumulado de puntos
-            //funcion resumenJugador
             echo ("Ingrese el nombre del jugador:");
             $nombreResumen = strtoupper(trim(fgets(STDIN)));
 
             $resumen = resumenJugador ($coleccionJuegos, $nombreResumen);
-            echo "********\n";
+            echo "***********\n";
             echo "Jugador " .$resumen["nombre"]."\n" ;
             echo "Ganó: ".$resumen["juegosGanados"]."\n" ;
             echo "Perdió: ".$resumen["juegosPerdidos"]."\n";
             echo "Empató: " .$resumen["juegosEmpatados"]."\n";
             echo "Total de puntos acumulados: ".$resumen["puntosAcumulados"]."\n";
-            echo "********\n";
+            echo "***********\n";
  
             break;
         case 6:     //mostrar listado de juegos ordenado por jugador O
