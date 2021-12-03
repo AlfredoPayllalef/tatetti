@@ -240,14 +240,15 @@ function solicitaSimbolo1()
     $simbolo = "";
 
     while ($bandera) {
-        echo ("ingrese un simbolo (X - O)");
+        echo ("Por favor ingrese un simbolo (X - O):");
+        
         $simboloIngresado = trim(fgets(STDIN));
         $simboloIngresado = strtoupper($simboloIngresado);
         if (($simboloIngresado == "X") || ($simboloIngresado == "O")) {
             $simbolo = $simboloIngresado;
             $bandera = false;
         } else {
-            echo ("el simbolo no coincide con las opciones permitidas. Reintente otra vez");
+            echo ("El simbolo no coincide con las opciones permitidas. Reintente otra vez:");
         }
     }
     return $simbolo;
@@ -317,6 +318,32 @@ function ordenarO($arrayJuegos)
 }
 
 /**
+ * Dada una coleccion de juegos y un simbolo (X-O), devuelve la cantidad de juegos ganados por ese simbolo
+*@param array $arraycompleto
+*@param string $simbolo
+*@return int 
+*/
+function juegosGanadosSimbolo($coleccionJuegos,$simbolo)
+{   //int $cantidadGanadosSimbolo
+    $cantidadGanadosSimbolo=0;
+    $n=count($coleccionJuegos);
+    if ($simbolo == "X") {
+         for ($i=0; $i <$n ;$i++) {
+             if($coleccionJuegos[$i]["puntosCruz"]>1){
+                    $cantidadGanadosSimbolo=$cantidadGanadosSimbolo+1;
+                }
+            }
+    }else {
+         for ($i=0; $i <$n ;$i++) {
+         if($coleccionJuegos[$i]["puntosCirculo"]>1){
+                    $cantidadGanadosSimbolo=$cantidadGanadosSimbolo+1;
+                }
+            }
+        }
+    return $cantidadGanadosSimbolo;
+}
+
+ /**
  * Inicializo una estructura de datos para los juegos
  * @return array 
  */
@@ -331,7 +358,6 @@ function arregloJuegos( $nombreJugadorCruz, $nombreJugadorCirculo, $puntosCruz, 
 
    return $juego;
 }
-
 
 /**
  * Inicializo una estructura de datos para ver el resumen del jugador
@@ -423,12 +449,13 @@ do {
             break;
        
         case 4: //mostrar porcentaje de juegos ganados
-            echo ("Por favor, ingrese uno de los símbolos (X o O):");
-            $simboloElegido = trim(fgets(STDIN));
+
+            $simboloElegido = solicitaSimbolo ();
+            $cantGanadosSim= juegosGanadosSimbolo ($coleccionJuegos, $simboloElegido);
             $cantidadJuegos = count($coleccionJuegos);
-            $juegosGanados = juegosConGanador($coleccionJuegos) ;
-            $porcentaje = $juegosGanados * 100 / $cantidadJuegos ;
-            echo "el porcentaje de juegos ganados es:" .$porcentaje. "% \n";
+            // $juegosGanados = juegosConGanador($coleccionJuegos) ;
+            $porcentaje = $cantGanadosSim * 100 / $cantidadJuegos ;
+            echo "El porcentaje de juegos ganados por " .$simboloElegido. " es: " .$porcentaje. "% \n";
  
             break;
         case 5: //mostrar resumen de
