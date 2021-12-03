@@ -344,7 +344,11 @@ function buscarPimerGanado($arrayColeccion,$nombre)
     }
     return $primerGanado;
 }
-
+/**
+ * funcion de comparacion
+ * @param String|int $juegoA, $juegoB
+ * @return int
+ */
 function cmp($juegoA, $juegoB) 
 {   //$juegoA,juegoB, int $orden
     $orden=0;
