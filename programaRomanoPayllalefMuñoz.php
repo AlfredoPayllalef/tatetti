@@ -424,9 +424,14 @@ do {
         case 3:   //mostrar el primer juego ganador
             echo"ingrese nombre del jugador ";
             $nombrebuscado =strtoupper(trim(fgets(STDIN)));
-            $coleccionJuegos = cargarJuegos ();
+            $coleccionJuegos = cargarJuegos (); //creo que no se incializa porque si no no te tomaria los valores nuevos del paso 1
             $primerGanado = buscarPimerGanado($coleccionJuegos,$nombrebuscado);
-        echo"el primer juego ganado por ".$nombrebuscado." es el N° ".$primerGanado. "\n";
+            //echo"el primer juego ganado por ".$nombrebuscado." es el N° ".$primerGanado. "\n";
+            echo "**************\n";
+            echo "Juego TATETI:" . ($primerGanado)."\n" ;
+            echo "Jugador X: ".$coleccionJuegos[$primerGanado]["jugadorCruz"]." obtuvo " .$coleccionJuegos[$primerGanado]["puntosCruz"]." puntos\n";
+            echo "Jugador O: ".$coleccionJuegos[$primerGanado]["jugadorCirculo"]. " obtuvo " .$coleccionJuegos[$primerGanado]["puntosCirculo"]." puntos\n";
+            echo "**************\n";
  
             break;
        
