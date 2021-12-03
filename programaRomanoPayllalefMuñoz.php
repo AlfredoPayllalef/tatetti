@@ -291,7 +291,7 @@ function buscarPimerGanado($arrayColeccion,$nombre)
         $bandera2=true;
         while ($bandera2==true) { //recorre los primeros dos elemntos del arreglo
             if ($arrayColeccion[$i][$j]==$nombre) {
-                if($arrayColeccion[$i]["puntosCruz"]>1 or $arrayColeccion[$i]["puntosCirculo"]>1 ){
+                if($arrayColeccion[$i]["puntosCruz"]>1 || $arrayColeccion[$i]["puntosCirculo"]>1 ){
                     $primerGanado=$i;
                     $bandera= false;
                     $bandera2=false;
@@ -380,7 +380,6 @@ function arregloJuegos( $nombreJugadorCruz, $nombreJugadorCirculo, $puntosCruz, 
 
     return $juego;
 }
-
 /****************************************** PROGRAMA PRINCIPAL **********************************************/
   
 //Declaración de variables:
@@ -424,10 +423,10 @@ do {
             break;
         case 3:   //mostrar el primer juego ganador
             echo"ingrese nombre del jugador ";
-            $nombrebuscado =trim(fgets(STDIN));
+            $nombrebuscado =strtoupper(trim(fgets(STDIN)));
             $coleccionJuegos = cargarJuegos ();
             $primerGanado = buscarPimerGanado($coleccionJuegos,$nombrebuscado);
-            echo"el primer juego ganado es el \n".$primerGanado. "\n";
+        echo"el primer juego ganado por ".$nombrebuscado." es el N° ".$primerGanado. "\n";
  
             break;
        
@@ -471,3 +470,5 @@ do {
         }
 } while ($opcion != 7);
 //                   FIN
+
+?>
