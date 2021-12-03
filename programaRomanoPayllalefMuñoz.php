@@ -99,7 +99,7 @@ function solicitarValor( $min, $max)
     echo "Ingrese un valor (entre " .$min. " y ".$max. "):";
     $valor = trim(fgets(STDIN));
     while ($valor < $min || $valor >$max ) {
-        echo ("El valor no es valido, ingrese un valor valido:");
+        echo ("El valor no es valido, ingrese un valor valido: ");
         $valor = trim(fgets(STDIN));
     }
     return $valor;
@@ -138,8 +138,8 @@ function agregarJuego($coleccionJuegos, $nombreJugadorX, $nombreJugadorO, $punto
 {
      // array $coleccionJuegos
     $i = count($coleccionJuegos); //cantidad de elementos
-    $nuevoJuego=["jugadorCruz"=> $nombreJugadorX , "jugadorCirculo" => $nombreJugadorO, "puntosCruz"=> $puntosX, "puntosCirculo" => $puntosO];
-    $coleccionJuegos [$i] = $nuevoJuego; 
+    $juegoNuevo=["jugadorCruz"=> $nombreJugadorX , "jugadorCirculo" => $nombreJugadorO, "puntosCruz"=> $puntosX, "puntosCirculo" => $puntosO]; 
+    $coleccionJuegos[$i]=$juegoNuevo;
     return $coleccionJuegos;
 }
 
@@ -193,7 +193,7 @@ function solicitaSimbolo()
     $simbolo = "";
    
     while($bandera){
-        echo("ingrese un simbolo (X - O)");
+        echo("ingrese un simbolo (X - O) ");
         $simboloIngresado = trim(fgets(STDIN));
         $simboloIngresado = strtoupper($simboloIngresado);
         if(($simboloIngresado == "X")||($simboloIngresado == "O")){
@@ -240,7 +240,7 @@ function solicitaSimbolo1()
     $simbolo = "";
 
     while ($bandera) {
-        echo ("Por favor ingrese un simbolo (X - O):");
+        echo ("Por favor ingrese un simbolo (X - O): ");
         
         $simboloIngresado = trim(fgets(STDIN));
         $simboloIngresado = strtoupper($simboloIngresado);
@@ -248,7 +248,7 @@ function solicitaSimbolo1()
             $simbolo = $simboloIngresado;
             $bandera = false;
         } else {
-            echo ("El simbolo no coincide con las opciones permitidas. Reintente otra vez:");
+            echo ("El simbolo no coincide con las opciones permitidas. Reintente otra vez: ");
         }
     }
     return $simbolo;
@@ -301,9 +301,9 @@ function buscarPimerGanado($arrayColeccion,$nombre)
 
 function cmp($juegoA, $juegoB) 
 {   //$juegoA,juegoB, $orden
-    if ($juegoA["jugadorCirculo"] == $juegoB["jugadorCirculo"]) {
+    if ($juegoA["jugadorCirculo"] == $juegoB["jugadorCruz"]) {
         $orden=0;
-    } elseif ($juegoA["juegoCirculo"] < $juegoB["jugadorCirculo"]) {
+    } elseif ($juegoA["juegoCirculo"] < $juegoB["jugadorCruz"]) {
         $oreden=-1;
     } else {
         $orden=1;
@@ -402,7 +402,7 @@ do {
             $nombreJugadorX = $juego["jugadorCruz"];
             $nombreJugadorO = $juego["jugadorCirculo"];
             $puntosX = $juego["puntosCruz"];
-            $puntosO = $juego ["puntosCirculo"];
+            $puntosO = $juego["puntosCirculo"];
             $coleccionJuegos = agregarJuego($coleccionJuegos,$nombreJugadorX, $nombreJugadorO, $puntosX, $puntosO); //agrego el juego nuevo a la coleccion
 
             break;    
