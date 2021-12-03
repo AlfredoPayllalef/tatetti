@@ -300,9 +300,9 @@ function buscarPimerGanado($arrayColeccion,$nombre)
 function cmp($juegoA, $juegoB) 
 {   //$juegoA,juegoB, int $orden
     $orden=0;
-    if ($juegoA["jugadorCirculo"] == $juegoB["jugadorCruz"]) {
+    if ($juegoA["jugadorCirculo"] == $juegoB["jugadorCirculo"]) {
         $orden = 0;
-    } elseif ($juegoA["jugadorCirculo"] < $juegoB["jugadorCruz"]) {
+    } elseif ($juegoA["jugadorCirculo"] < $juegoB["jugadorCirculo"]) {
         $orden = -1;
     } else {
         $orden = 1;
@@ -394,7 +394,7 @@ do {
 
             break;    
         case 2:  //mostrar un juego en pantalla
-            $min = 0;
+            $min = 1;
             $max = count($coleccionJuegos); //Obtengo la cantidad maxima de elementos que tiene el arreglo
             $numeroJuego = solicitarValor( $min, $max); //le solicito el valor y verifico que sea correcto
             echo "NUMERO DEVUELTO: " .$numeroJuego;
