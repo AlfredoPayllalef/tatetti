@@ -19,12 +19,12 @@ function cargarJuegos (){
     //array $juego0 , $juego1, $juego2, $juego3, $juego4, $juego5, $juego6, $juego7, $juego8, $juego9
 
     $juego1=["jugadorCruz"=> "MAJO" , "jugadorCirculo" => "DAVID", "puntosCruz"=> 1, "puntosCirculo" => 1];
-    $juego2=["jugadorCruz"=> "PABLO" , "jugadorCirculo" => "SEBA", "puntosCruz"=> 0, "puntosCirculo" => 3];
+    $juego2=["jugadorCruz"=> "MAJO" , "jugadorCirculo" => "SEBA", "puntosCruz"=> 0, "puntosCirculo" => 3];
     $juego3=["jugadorCruz"=> "JUAN" , "jugadorCirculo" => "SOFIA", "puntosCruz"=> 0, "puntosCirculo" => 5];
     $juego4=["jugadorCruz"=> "CARLOS" , "jugadorCirculo" => "DANIEL", "puntosCruz"=> 1, "puntosCirculo" => 1];
     $juego5=["jugadorCruz"=> "RUBEN" , "jugadorCirculo" => "PAULA", "puntosCruz"=> 1, "puntosCirculo" => 1];
     $juego6=["jugadorCruz"=> "JOAQUIN" , "jugadorCirculo" => "SOL", "puntosCruz"=> 0, "puntosCirculo" => 4];
-    $juego7=["jugadorCruz"=> "MARIA" , "jugadorCirculo" => "MAJO", "puntosCruz"=> 5, "puntosCirculo" => 0];
+    $juego7=["jugadorCruz"=> "MARIA" , "jugadorCirculo" => "MAJO", "puntosCruz"=> 0, "puntosCirculo" => 5];
     $juego8=["jugadorCruz"=> "SOL" , "jugadorCirculo" => "JOAQUIN", "puntosCruz"=> 0, "puntosCirculo" => 3];
     $juego9=["jugadorCruz"=> "SOFIA" , "jugadorCirculo" => "BLANCA", "puntosCruz"=> 4, "puntosCirculo" => 0];
     $juego10=["jugadorCruz"=> "MARTIN" , "jugadorCirculo" => "FEDE", "puntosCruz"=> 1, "puntosCirculo" => 1];
@@ -99,7 +99,7 @@ function solicitarValor( $min, $max)
     echo "Ingrese un valor (entre " .$min. " y ".$max. "):";
     $valor = trim(fgets(STDIN));
     while ($valor < $min || $valor >$max ) {
-        echo ("El valor no es valido, ingrese un valor valido:");
+        echo ("El valor no es valido, ingrese un valor valido: ");
         $valor = trim(fgets(STDIN));
     }
     return $valor;
@@ -138,8 +138,8 @@ function agregarJuego($coleccionJuegos, $nombreJugadorX, $nombreJugadorO, $punto
 {
      // array $coleccionJuegos
     $i = count($coleccionJuegos); //cantidad de elementos
-    $nuevoJuego=["jugadorCruz"=> $nombreJugadorX , "jugadorCirculo" => $nombreJugadorO, "puntosCruz"=> $puntosX, "puntosCirculo" => $puntosO];
-    $coleccionJuegos [$i] = $nuevoJuego; 
+    $juegoNuevo=["jugadorCruz"=> $nombreJugadorX , "jugadorCirculo" => $nombreJugadorO, "puntosCruz"=> $puntosX, "puntosCirculo" => $puntosO]; 
+    $coleccionJuegos[$i]=$juegoNuevo;
     return $coleccionJuegos;
 }
 
@@ -239,7 +239,7 @@ function solicitaSimbolo()
     $simbolo = "";
    
     while($bandera){
-        echo("Por favor ingrese un simbolo (X - O):");
+        echo("ingrese un simbolo (X - O) ");
         $simboloIngresado = trim(fgets(STDIN));
         $simboloIngresado = strtoupper($simboloIngresado);
         if(($simboloIngresado == "X")||($simboloIngresado == "O")){
@@ -276,6 +276,31 @@ function juegosConGanador($colecJuegos)
 }
 
 /**
+ * este modulo solicita al usuario un simbolo X o O, valida el dato ingresado y retorna el simbolo elegido
+ * @param STRING $simbolo, $simboloIngresado
+ * @param boolean $bandera
+ */
+function solicitaSimbolo1()
+{
+    $bandera = true;
+    $simbolo = "";
+
+    while ($bandera) {
+        echo ("Por favor ingrese un simbolo (X - O): ");
+        
+        $simboloIngresado = trim(fgets(STDIN));
+        $simboloIngresado = strtoupper($simboloIngresado);
+        if (($simboloIngresado == "X") || ($simboloIngresado == "O")) {
+            $simbolo = $simboloIngresado;
+            $bandera = false;
+        } else {
+            echo ("El simbolo no coincide con las opciones permitidas. Reintente otra vez: ");
+        }
+    }
+    return $simbolo;
+}
+
+/**
  * inicializa uuna funcion que busca encontrar el primer juego ganado de la persona ingresada por teclado
  * @param array $array
  * @param string $nombre
@@ -283,7 +308,7 @@ function juegosConGanador($colecJuegos)
  * */
 function buscarPimerGanado($arrayColeccion,$nombre)
 {   //int $primerGanado
-    $n=count($arrayColeccion);//busca la dimencion del array
+    $n=count($arrayColeccion);//busca la dimension del array
     $i=0;
     $bandera= true;
     while ($i <$n && $bandera) { //recorre el cada arreglo 
@@ -291,7 +316,7 @@ function buscarPimerGanado($arrayColeccion,$nombre)
         $bandera2=true;
         while ($bandera2==true) { //recorre los primeros dos elemntos del arreglo
             if ($arrayColeccion[$i][$j]==$nombre) {
-                if($arrayColeccion[$i]["puntosCruz"]>1 || $arrayColeccion[$i]["puntosCirculo"]>1 ){
+                if($arrayColeccion[$i]["puntosCruz"]>1 && $arrayColeccion[$i]["jugadorCruz"]==$nombre || $arrayColeccion[$i]["puntosCirculo"]>1 && $arrayColeccion[$i]["jugadorCirculo"]==$nombre ){
                     $primerGanado=$i;
                     $bandera= false;
                     $bandera2=false;
@@ -319,13 +344,18 @@ function buscarPimerGanado($arrayColeccion,$nombre)
     }
     return $primerGanado;
 }
-
+/**
+ * funcion de comparacion
+ * @param String|int $juegoA, $juegoB
+ * @return int
+ */
 function cmp($juegoA, $juegoB) 
-{   //$juegoA,juegoB, $orden
-    if ($juegoA["jugadorCirculo"] == $juegoB["jugadorCirculo"]) {
+{   //$juegoA,juegoB, int $orden
+    $orden=0;
+    if ($juegoA["jugadorCirculo"] == $juegoB["jugadorCruz"]) {
         $orden=0;
-    } elseif ($juegoA["juegoCirculo"] < $juegoB["jugadorCirculo"]) {
-        $orden=-1;
+    } elseif ($juegoA["jugadorCirculo"] < $juegoB["jugadorCruz"]) {
+        $oreden=-1;
     } else {
         $orden=1;
     }
@@ -407,7 +437,7 @@ do {
             $nombreJugadorX = $juego["jugadorCruz"];
             $nombreJugadorO = $juego["jugadorCirculo"];
             $puntosX = $juego["puntosCruz"];
-            $puntosO = $juego ["puntosCirculo"];
+            $puntosO = $juego["puntosCirculo"];
             $coleccionJuegos = agregarJuego($coleccionJuegos,$nombreJugadorX, $nombreJugadorO, $puntosX, $puntosO); //agrego el juego nuevo a la coleccion
 
             break;    
@@ -422,17 +452,18 @@ do {
           
             break;
         case 3:   //mostrar el primer juego ganador
-            echo"ingrese nombre del jugador ";
-            $nombrebuscado =strtoupper(trim(fgets(STDIN)));
-            $coleccionJuegos = cargarJuegos (); //creo que no se incializa porque si no no te tomaria los valores nuevos del paso 1
-            $primerGanado = buscarPimerGanado($coleccionJuegos,$nombrebuscado);
+            echo"ingrese nombre del jugador: ";
+            $nombreBuscado =strtoupper(trim(fgets(STDIN)));
+            //$coleccionJuegos = cargarJuegos (); //no se incializa vacio porque si no no te tomaria los valores nuevos del paso 1
+            $primerGanado = buscarPimerGanado($coleccionJuegos,$nombreBuscado);
             //echo"el primer juego ganado por ".$nombrebuscado." es el N° ".$primerGanado. "\n";
             echo "**************\n";
             echo "Juego TATETI:" . ($primerGanado)."\n" ;
             echo "Jugador X: ".$coleccionJuegos[$primerGanado]["jugadorCruz"]." obtuvo " .$coleccionJuegos[$primerGanado]["puntosCruz"]." puntos\n";
             echo "Jugador O: ".$coleccionJuegos[$primerGanado]["jugadorCirculo"]. " obtuvo " .$coleccionJuegos[$primerGanado]["puntosCirculo"]." puntos\n";
             echo "**************\n";
- 
+            // falta la parte de que si el jugador no gano ningun juego debe decir
+            //echo "El jugador " .$nombreBuscado. "no gano ningún juego";  
             break;
        
         case 4: //mostrar porcentaje de juegos ganados
@@ -445,20 +476,20 @@ do {
             echo "El porcentaje de juegos ganados por " .$simboloElegido. " es: " .$porcentaje. "% \n";
  
             break;
-        case 5: //mostrar resumen de
+
+        case 5: 
             // muestra en pantalla un resumen de los juegos ganados, los juegos perdidos, empates y acumulado de puntos
-            //funcion resumenJugador
             echo ("Ingrese el nombre del jugador:");
             $nombreResumen = strtoupper(trim(fgets(STDIN)));
 
             $resumen = resumenJugador ($coleccionJuegos, $nombreResumen);
-            echo "********\n";
+            echo "***********\n";
             echo "Jugador " .$resumen["nombre"]."\n" ;
             echo "Ganó: ".$resumen["juegosGanados"]."\n" ;
             echo "Perdió: ".$resumen["juegosPerdidos"]."\n";
             echo "Empató: " .$resumen["juegosEmpatados"]."\n";
             echo "Total de puntos acumulados: ".$resumen["puntosAcumulados"]."\n";
-            echo "********\n";
+            echo "***********\n";
  
             break;
         case 6:     //mostrar listado de juegos ordenado por jugador O
