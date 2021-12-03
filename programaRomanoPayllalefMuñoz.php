@@ -19,7 +19,7 @@ function cargarJuegos (){
     //array $juego0 , $juego1, $juego2, $juego3, $juego4, $juego5, $juego6, $juego7, $juego8, $juego9
 
     $juego1=["jugadorCruz"=> "MAJO" , "jugadorCirculo" => "DAVID", "puntosCruz"=> 1, "puntosCirculo" => 1];
-    $juego2=["jugadorCruz"=> "PABLO" , "jugadorCirculo" => "SEBA", "puntosCruz"=> 0, "puntosCirculo" => 3];
+    $juego2=["jugadorCruz"=> "MAJO" , "jugadorCirculo" => "SEBA", "puntosCruz"=> 0, "puntosCirculo" => 3];
     $juego3=["jugadorCruz"=> "JUAN" , "jugadorCirculo" => "SOFIA", "puntosCruz"=> 0, "puntosCirculo" => 5];
     $juego4=["jugadorCruz"=> "CARLOS" , "jugadorCirculo" => "DANIEL", "puntosCruz"=> 1, "puntosCirculo" => 1];
     $juego5=["jugadorCruz"=> "RUBEN" , "jugadorCirculo" => "PAULA", "puntosCruz"=> 1, "puntosCirculo" => 1];
@@ -259,7 +259,7 @@ function buscarPimerGanado($arrayColeccion,$nombre)
         $bandera2=true;
         while ($bandera2==true) { //recorre los primeros dos elemntos del arreglo
             if ($arrayColeccion[$i][$j]==$nombre) {
-                if($arrayColeccion[$i]["puntosCruz"]>1 || $arrayColeccion[$i]["puntosCirculo"]>1 ){
+                if($arrayColeccion[$i]["puntosCruz"]>1 && $arrayColeccion[$i]["jugadorCruz"]==$nombre || $arrayColeccion[$i]["puntosCirculo"]>1 && $arrayColeccion[$i]["jugadorCirculo"]==$nombre ){
                     $primerGanado=$i;
                     $bandera= false;
                     $bandera2=false;
@@ -287,22 +287,32 @@ function buscarPimerGanado($arrayColeccion,$nombre)
     }
     return $primerGanado;
 }
-
+/**
+ * funcion de comparacion
+ * @param array $juegoA, $juegoB
+ * @var int $orden
+ * @return int
+ */
 function cmp($juegoA, $juegoB) 
-{   //$juegoA,juegoB, $orden
+{   //$juegoA,juegoB, int $orden
+    $orden=0;
     if ($juegoA["jugadorCirculo"] == $juegoB["jugadorCruz"]) {
         $orden=0;
-    } elseif ($juegoA["juegoCirculo"] < $juegoB["jugadorCruz"]) {
-        $oreden=-1;
+    } elseif ($juegoA["jugadorCirculo"] < $juegoB["jugadorCruz"]) {
+        $orden=-1;
     } else {
         $orden=1;
     }
     return $orden;
 }
-
+/**
+ * esta funcion ordena y muestra en pantalla el arreglo en orden definido por la funcion comparacion (cmp) manteniendo la asociacion de indices
+ * @param array $arrayJuegos
+ */
 function ordenarO($arrayJuegos)
 {
-    uasort($arrayJuegos, 'cmp');
+    uasort($arrayJuegos, 'cmp'); //Ordena un array con una función de comparación definida 
+    //por el usuario y mantiene la asociación de índices
     print_r($arrayJuegos);
 }
 
@@ -397,7 +407,7 @@ do {
             //echo"el primer juego ganado por ".$nombrebuscado." es el N° ".$primerGanado. "\n";
             if ( $primerGanado <> -1){
                 echo "**************\n";
-                echo "Juego TATETI:" . ($primerGanado)."\n" ;
+                echo "Juego TATETI:" . ($primerGanado + 1)."\n" ;
                 echo "Jugador X: ".$coleccionJuegos[$primerGanado]["jugadorCruz"]." obtuvo " .$coleccionJuegos[$primerGanado]["puntosCruz"]." puntos\n";
                 echo "Jugador O: ".$coleccionJuegos[$primerGanado]["jugadorCirculo"]. " obtuvo " .$coleccionJuegos[$primerGanado]["puntosCirculo"]." puntos\n";
                 echo "**************\n";
